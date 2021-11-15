@@ -24,6 +24,6 @@ jobs:
       - name: Install dependencies
         run: npm clean-install
       - name: Serve tests application
-        run: npx ng serve --configuration=production
+        run: npx ng serve --configuration=production &
       - name: Run tests
         run: npm run test -- --debug=true --headless=true --watch=false
