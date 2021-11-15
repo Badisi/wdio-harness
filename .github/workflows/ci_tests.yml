@@ -22,10 +22,15 @@ jobs:
       - name: Make sure npm is latest
         run: npm install -g npm@latest
       - name: Install dependencies
-        run: npm clean-install
+        run: |
+          npm clean-install
+          npm install -g http-server
+      - name: Build tests application
+        run: npm run build:tests-app
       - name: Serve tests application
         run: |
-          npx ng serve --configuration=production &
+          cd dist/tests-app
+          http-server &
           sleep 5 &&
           curl http://localhost:4200 -I
       - name: Run tests
