@@ -4,7 +4,7 @@ import { WebdriverIOHarnessEnvironment } from './WebdriverIOHarnessEnvironment';
 
 /**
  * Returns a base harness environment instance.
- * @return An instance of a base harness environment
+ * @return An HarnessLoader instance for the current HTML document, rooted at the document's root element
  */
 export const createHarnessEnvironment = async (
     documentRoot?: WebdriverIO.Element
