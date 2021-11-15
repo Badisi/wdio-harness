@@ -1,0 +1,34 @@
+<header>DEMO-WEB</header>
+
+<br>
+
+<mat-form-field appearance="fill">
+    <mat-label>Choose a food</mat-label>
+    <mat-select id="demo-select">
+        <mat-option *ngFor="let food of foods"
+                    [value]="food">
+            {{ food }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<br>
+
+<mat-form-field appearance="fill">
+    <mat-label>Choose a date</mat-label>
+    <input id="demo-datepicker-input"
+           matInput
+           [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix
+                           [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<br>
+
+<button id="demo-button"
+        mat-flat-button
+        color="primary"
+        (click)="message='CLICKED'">CLICK ME</button>
+
+<div class="message">{{ message }}</div>

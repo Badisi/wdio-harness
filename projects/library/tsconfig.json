@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+        "baseUrl": "src",
+        "rootDir": "src",
+        "moduleResolution": "node",
+        "lib": [
+            "es2018",
+            "dom"
+        ],
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "declaration": true,
+        "esModuleInterop": true,
+        "inlineSourceMap": false,
+        "listEmittedFiles": false,
+        "listFiles": false,
+        "noFallthroughCasesInSwitch": true,
+        "pretty": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "traceResolution": false,
+        "importHelpers": true,
+        "strictPropertyInitialization": true,
+        "noUnusedLocals": true,
+        "types": [
+            "node",
+            "webdriverio/async"
+        ]
+    },
+    "compileOnSave": false,
+    "include": [
+        "src/**/*.ts"
+    ]
+}
