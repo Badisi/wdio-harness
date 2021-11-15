@@ -31,6 +31,13 @@ $ yarn add @badisi/wdio-harness --dev
 
 ## Usage
 
+__Methods__
+
+- `createHarnessEnvironment(documentRoot)` - gets a HarnessLoader instance for the given HTML element
+- `getHarness(query)` - searches for an instance of the given ComponentHarness class or HarnessPredicate
+- `getAllHarnesses(query)` - acts like getHarness, but returns an array of harness instances
+- `waitForAngular()` - waits for Angular to finish bootstrapping
+
 __Example__
 
 ```ts
@@ -44,7 +51,7 @@ import { getHarness } from '@badisi/wdio-harness';
 
 describe('Angular Material Harness', () => {
     beforeEach(async () => {
-        await browser.url(`http://localhost:4200`);
+        await browser.url('http://localhost:4200');
     });
 
     it('MatDatePicker', async () => {
