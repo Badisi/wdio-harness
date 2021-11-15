@@ -24,6 +24,9 @@ jobs:
       - name: Install dependencies
         run: npm clean-install
       - name: Serve tests application
-        run: npx ng serve --configuration=production &
+        run: |
+          npx ng serve --configuration=production &
+          sleep 5 &&
+          curl http://localhost:4200 -I
       - name: Run tests
         run: npm run test -- --debug=true --headless=true --watch=false
