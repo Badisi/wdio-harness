@@ -1,6 +1,6 @@
 # @badisi/wdio-harness
 
-🧪 WebdriverIO support for Angular component test harnesses.
+🔬 [WebdriverIO][wdio] support for Angular component test harnesses.
 
 [![npm version](https://img.shields.io/npm/v/@badisi/wdio-harness.svg?color=blue&logo=npm)][npm]
 [![npm downloads](https://img.shields.io/npm/dw/@badisi/wdio-harness.svg?color=blue&logo=npm)][npm-dl]
@@ -11,7 +11,7 @@
 
 <hr>
 
-## Component test harnesses
+#### Component test harnesses
 
 > A component harness is a class that lets a test interact with a component via a supported API. Each harness's API interacts with a component the same way a user would. By using the harness API, a test insulates itself against updates to the internals of a component, such as changing its DOM structure. The idea for component harnesses comes from the [PageObject](https://martinfowler.com/bliki/PageObject.html) pattern commonly used for integration testing.
 
@@ -93,4 +93,5 @@ Please read and follow the [Code of Conduct][codeofconduct] and help me keep thi
 [developer]: https://github.com/badisi/wdio-harness/blob/master/DEVELOPER.md
 [contributing]: https://github.com/badisi/wdio-harness/blob/master/CONTRIBUTING.md
 [codeofconduct]: https://github.com/badisi/wdio-harness/blob/master/CODE_OF_CONDUCT.md
+[wdio]: https://webdriver.io/
 [examples]: https://github.com/badisi/wdio-harness/blob/master/projects/tests/harness.e2e.ts
