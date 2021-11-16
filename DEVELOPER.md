@@ -43,7 +43,7 @@ You can test the library while developing it, as follow:
 The library will be built in the `./dist` directory.
 
 ```sh
-$ npm run build
+$ npm run build:lib
 ```
 
 ## Publishing to NPM repository
