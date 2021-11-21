@@ -47,11 +47,12 @@ __Example__
 
 /** ESM / Typescript */
 import { MatDatepickerInputHarness } from '@angular/material/datepicker/testing';
-import { getHarness } from '@badisi/wdio-harness';
+import { getHarness, waitForAngular } from '@badisi/wdio-harness';
 
 describe('Angular Material Harness', () => {
     beforeEach(async () => {
         await browser.url('http://localhost:4200');
+        await waitForAngular();
     });
 
     it('MatDatePicker', async () => {
