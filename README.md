@@ -3,7 +3,7 @@
 🔬 [WebdriverIO][wdio] support for Angular component test harnesses.
 
 [![npm version](https://img.shields.io/npm/v/@badisi/wdio-harness.svg?color=blue&logo=npm)][npm]
-[![npm downloads](https://img.shields.io/npm/dw/@badisi/wdio-harness.svg?color=blue&logo=npm)][npm-dl]
+[![npm downloads](https://img.shields.io/npm/dw/@badisi/wdio-harness.svg?color=7986CB&logo=npm)][npm-dl]
 [![license](https://img.shields.io/npm/l/@badisi/wdio-harness.svg?color=ff69b4)][license]
 
 [![build status](https://github.com/badisi/wdio-harness/workflows/CI%20tests/badge.svg)][ci-tests]
