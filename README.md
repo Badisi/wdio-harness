@@ -21,11 +21,11 @@
 ## Installation
 
 ```sh
-$ npm install @badisi/wdio-harness --save-dev
+npm install @badisi/wdio-harness --save-dev
 ```
 
 ```sh
-$ yarn add @badisi/wdio-harness --dev
+yarn add @badisi/wdio-harness --dev
 ```
 
 

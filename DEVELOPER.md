@@ -12,8 +12,8 @@ Before you can build and test this library you must install and configure the fo
 You will then need to install the library required dependencies:
 
 ```sh
-$ cd <library-path>
-$ npm install
+cd <library-path>
+npm install
 ```
 
 ## Testing locally
@@ -23,7 +23,7 @@ You can test the library while developing it, as follow:
 1. Start the testing application
 
    ```sh
-   $ npm start
+   npm start
    ```
 
 2. Make any modifications
@@ -35,7 +35,7 @@ You can test the library while developing it, as follow:
 3. Run the test
 
    ```sh
-   $ npm run test
+   npm run test
    ```
 
 ## Building the library
@@ -43,7 +43,7 @@ You can test the library while developing it, as follow:
 The library will be built in the `./dist` directory.
 
 ```sh
-$ npm run build:lib
+npm run build:lib
 ```
 
 ## Publishing to NPM repository
