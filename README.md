@@ -9,7 +9,7 @@
 [![build status](https://github.com/badisi/wdio-harness/workflows/CI%20tests/badge.svg)][ci-tests]
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)][pullrequest]
 
-<hr>
+<hr/>
 
 #### Component test harnesses
 
