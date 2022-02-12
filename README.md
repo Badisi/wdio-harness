@@ -96,10 +96,10 @@ Please read and follow the [Code of Conduct][codeofconduct] and help me keep thi
 [npm]: https://www.npmjs.com/package/@badisi/wdio-harness
 [npm-dl]: https://npmcharts.com/compare/@badisi/wdio-harness?minimal=true
 [ci-tests]: https://github.com/badisi/wdio-harness/actions?query=workflow:CI%20tests
-[pullrequest]: https://github.com/badisi/wdio-harness/blob/master/CONTRIBUTING.md#-submitting-a-pull-request-pr
-[license]: https://github.com/badisi/wdio-harness/blob/master/LICENSE
-[developer]: https://github.com/badisi/wdio-harness/blob/master/DEVELOPER.md
-[contributing]: https://github.com/badisi/wdio-harness/blob/master/CONTRIBUTING.md
-[codeofconduct]: https://github.com/badisi/wdio-harness/blob/master/CODE_OF_CONDUCT.md
+[pullrequest]: https://github.com/badisi/wdio-harness/blob/main/CONTRIBUTING.md#-submitting-a-pull-request-pr
+[license]: https://github.com/badisi/wdio-harness/blob/main/LICENSE
+[developer]: https://github.com/badisi/wdio-harness/blob/main/DEVELOPER.md
+[contributing]: https://github.com/badisi/wdio-harness/blob/main/CONTRIBUTING.md
+[codeofconduct]: https://github.com/badisi/wdio-harness/blob/main/CODE_OF_CONDUCT.md
 [wdio]: https://webdriver.io/
-[examples]: https://github.com/badisi/wdio-harness/blob/master/projects/tests/harness.e2e.ts
+[examples]: https://github.com/badisi/wdio-harness/blob/main/projects/tests/harness.e2e.ts

@@ -299,7 +299,7 @@ The content of the commit message body should contain:
 
 
 
-[coc]: https://github.com/badisi/wdio-harness/blob/master/CODE_OF_CONDUCT.md
+[coc]: https://github.com/badisi/wdio-harness/blob/main/CODE_OF_CONDUCT.md
 [github]: https://github.com/badisi/wdio-harness
 [issue-templates]: https://github.com/badisi/wdio-harness/issues/new/choose
 [github-pr]: https://github.com/badisi/wdio-harness/pulls
