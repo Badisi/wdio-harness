@@ -43,7 +43,7 @@ const copyAssets = () => cpy(
     }
 );
 
-const customizePackageJson = async () => {
+const customizePackageJson = () => {
     const pkgJsonPath = pathResolve(DIST_PATH, 'package.json');
     const pkgJson = JSON.parse(readFileSync(pkgJsonPath, { encoding: 'utf8' }));
     delete pkgJson.scripts;
@@ -69,7 +69,7 @@ const build = async () => {
     await copyAssets();
 
     log('> Customizing package.json..');
-    await customizePackageJson();
+    customizePackageJson();
 
     log(`> ${green('Done!')}\n`);
 };
