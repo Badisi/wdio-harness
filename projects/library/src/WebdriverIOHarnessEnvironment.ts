@@ -1,7 +1,7 @@
 import { HarnessEnvironment, HarnessLoader, TestElement } from '@angular/cdk/testing';
 import logger from '@wdio/logger';
 
-import { magenta, green } from 'colors/safe';
+import { magenta, green } from '@colors/colors/safe';
 
 import { WebdriverIOTestElement } from './WebdriverIOTestElement';
 

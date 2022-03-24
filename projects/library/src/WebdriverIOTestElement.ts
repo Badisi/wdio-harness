@@ -9,7 +9,7 @@ import {
 } from '@angular/cdk/testing';
 import logger from '@wdio/logger';
 
-import { magenta, green } from 'colors/safe';
+import { magenta, green } from '@colors/colors/safe';
 
 enum Button {
     LEFT = 'left',
@@ -187,7 +187,7 @@ export class WebdriverIOTestElement implements TestElement {
 
     /** Gets the text from the element. */
     text(options?: TextOptions): Promise<string> {
-        this.logAction('TEXT', `{ exclude: ${options?.exclude} }`);
+        this.logAction('TEXT', `{ exclude: ${options?.exclude} }`);
         if (options?.exclude) {
             return browser.executeScript(`
                 const clone = arguments[0].cloneNode(true) as Element;
