@@ -36,7 +36,7 @@
     "scripts": {
         "start": "ng serve",
         "test": "npm run start --prefix=projects/tests -- --debug=true --headless=false --watch=true",
-        "build:lib": "node ./projects/library/build.js",
+        "build:lib": "node ./projects/library/build.mjs",
         "build:tests-app": "ng build --project=tests-app --configuration=production"
     },
     "peerDependencies": {

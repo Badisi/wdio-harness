@@ -1,15 +1,16 @@
-const { existsSync, mkdirSync, rmSync, readFileSync, writeFileSync } = require('fs');
-const { resolve: pathResolve } = require('path');
-const { green, magenta } = require('colors/safe');
-const { exec } = require('child_process');
-const cpy = require('cpy');
+/* eslint-disable @typescript-eslint/no-unsafe-argument, @typescript-eslint/naming-convention, no-underscore-dangle */
+
+import colors from '@colors/colors/safe.js';
+import { existsSync, mkdirSync, rmSync, readFileSync, writeFileSync } from 'fs';
+import { dirname, resolve as pathResolve } from 'path';
+import { fileURLToPath } from 'url';
+import { exec } from 'child_process';
+import cpy from 'cpy';
+
+const { green, magenta } = colors;
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const DIST_PATH = pathResolve(__dirname, '../../dist');
-const LIB_ASSETS = [
-    pathResolve(__dirname, '../../README.md'),
-    pathResolve(__dirname, '../../LICENSE'),
-    pathResolve(__dirname, '../../package.json')
-];
 
 const log = str => console.log(magenta(str));
 
@@ -35,13 +36,11 @@ const cleanDir = path => new Promise(resolve => {
     }, exists ? 1000 : 0);
 });
 
-const copyAssets = () => cpy(
-    LIB_ASSETS,
-    DIST_PATH,
-    {
-        expandDirectories: true
-    }
-);
+const copyAssets = async () => {
+    await cpy('README.md', DIST_PATH, { flat: true });
+    await cpy('LICENSE', DIST_PATH, { flat: true });
+    await cpy('package.json', DIST_PATH, { flat: true });
+};
 
 const customizePackageJson = () => {
     const pkgJsonPath = pathResolve(DIST_PATH, 'package.json');
@@ -74,7 +73,7 @@ const build = async () => {
     log(`> ${green('Done!')}\n`);
 };
 
-(async () => {
+void (async () => {
     try {
         await build();
     } catch (err) {
