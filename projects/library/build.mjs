@@ -37,8 +37,8 @@ const cleanDir = path => new Promise(resolve => {
 });
 
 const copyAssets = async () => {
-    await cpy('README.md', DIST_PATH, { flat: true });
-    await cpy('LICENSE', DIST_PATH, { flat: true });
+    await cpy('../../README.md', DIST_PATH, { flat: true });
+    await cpy('../../LICENSE', DIST_PATH, { flat: true });
     await cpy('package.json', DIST_PATH, { flat: true });
 };
 

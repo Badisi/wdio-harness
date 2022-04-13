@@ -44,12 +44,13 @@ jobs:
       - name: Install latest npm
         run: npm install -g npm@latest
 
-      - name: Install latest Chrome
-        run: |
-          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-          sudo apt-get update
-          sudo apt-get install google-chrome-stable
+      # - name: Install latest Chrome
+      #   if: ${{ matrix.os == 'ubuntu-latest' }}
+      #   run: |
+      #     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+      #     sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+      #     sudo apt-get update
+      #     sudo apt-get install google-chrome-stable
 
       - name: Cache node_modules
         uses: actions/cache@v3
@@ -78,4 +79,4 @@ jobs:
           curl http://localhost:4200 -I
 
       - name: Run tests
-        run: npm run test -- --debug=true --headless=true --watch=false
+        run: npm run start:tests-e2e -- -- --watch=false --debug=false --headless=true
