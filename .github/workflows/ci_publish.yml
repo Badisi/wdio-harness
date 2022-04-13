@@ -1,45 +1,38 @@
-name: Publish library to NPM
+name: Publish library
 
 on:
   release:
     types: [created]
 
 jobs:
+  ci_tests:
+    uses: ./.github/workflows/ci_tests.yml
+
   ci_publish:
+    needs: ci_tests
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
+
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 16
           registry-url: https://registry.npmjs.org/
-      - name: Make sure chrome is latest
-        run: |
-          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-          sudo apt-get update
-          sudo apt-get install google-chrome-stable
-      - name: Make sure npm is latest
+          cache: npm
+
+      - name: Install latest npm
         run: npm install -g npm@latest
+
       - name: Install dependencies
-        run: |
-          npm clean-install
-          npm install -g http-server
-      - name: Build tests application
-        run: npm run build:tests-app
-      - name: Serve tests application
-        run: |
-          cd dist/tests-app
-          http-server --port=4200 &
-          sleep 5 &&
-          curl http://localhost:4200 -I
-      - name: Run tests
-        run: npm run test -- --debug=true --headless=true --watch=false
-      - name: Build library
+        run: npm clean-install --engine-strict
+
+      - name: Build
         run: npm run build:lib
-      - name: Publish library
+
+      - name: Publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish ./dist --access public

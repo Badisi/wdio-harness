@@ -1,4 +1,4 @@
-name: CI tests
+name: Run tests
 
 on:
   push:
@@ -7,42 +7,75 @@ on:
     tags-ignore:
     - '**'
   pull_request:
+  workflow_call:
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   ci_tests:
-    name: Tests on linux node${{ matrix.node }}
-    runs-on: ubuntu-latest
+    name: Tests on ${{ matrix.os }} node${{ matrix.node }}
+    runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
-        node: ['12', '14', '16']
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: [12, 14, 16]
+
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
+
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
           registry-url: https://registry.npmjs.org/
-      - name: Make sure chrome is latest
+          cache: npm
+
+      # https://github.com/actions/setup-node/issues/411
+      # https://github.com/npm/cli/issues/4341
+      - name: Workaround for npm installation on Windows
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: npm install -g npm@8.3.1
+
+      - name: Install latest npm
+        run: npm install -g npm@latest
+
+      - name: Install latest Chrome
         run: |
           wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
           sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
           sudo apt-get update
           sudo apt-get install google-chrome-stable
-      - name: Make sure npm is latest
-        run: npm install -g npm@latest
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        id: cache-step
+        with:
+          key: cache-${{ matrix.os }}-node${{ matrix.node }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            cache-${{ matrix.os }}-node${{ matrix.node }}-
+          path: |
+            node_modules
+
       - name: Install dependencies
+        if: steps.cache-step.outputs.cache-hit != 'true'
         run: |
-          npm clean-install
+          npm clean-install --engine-strict
           npm install -g http-server
+
       - name: Build tests application
         run: npm run build:tests-app
+
       - name: Serve tests application
         run: |
           cd dist/tests-app
           http-server --port=4200 &
           sleep 5 &&
           curl http://localhost:4200 -I
+
       - name: Run tests
         run: npm run test -- --debug=true --headless=true --watch=false
