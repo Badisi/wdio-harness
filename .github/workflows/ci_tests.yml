@@ -64,15 +64,14 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache-step.outputs.cache-hit != 'true'
-        run: |
-          npm clean-install --engine-strict
-          npm install -g http-server
+        run: npm clean-install --engine-strict
 
       - name: Build tests application
         run: npm run build:tests-app
 
       - name: Serve tests application
         run: |
+          npm install -g http-server
           cd dist/tests-app
           http-server --port=4200 &
           sleep 5 &&
