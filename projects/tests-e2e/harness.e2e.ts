@@ -3,7 +3,22 @@ import { MatSelectHarness } from '@angular/material/select/testing';
 import { MatDatepickerInputHarness } from '@angular/material/datepicker/testing';
 import { getHarness } from '@badisi/wdio-harness';
 
+const nodeMajorVersion = process.versions.node.split('.')[0];
+
 describe('Angular Material Harness', () => {
+    /**
+     * `expect-webdriverio` is not working on Node16
+     *  patch until https://github.com/webdriverio/webdriverio/issues/8219 is fixed.
+     */
+    if (nodeMajorVersion === '16') {
+        beforeAll(async () => {
+            require('expect-webdriverio');
+            global.wdioExpect = global.expect;
+            const jasmine = require('jasmine');
+            global.expect = jasmine.expect;
+        });
+    }
+
     beforeEach(async () => {
         await browser.url('http://localhost:4200');
     });
@@ -15,7 +30,11 @@ describe('Angular Material Harness', () => {
         const messageEl = $('.message');
         //
         // Webdriverio syntax
-        await expect(messageEl).toHaveText('CLICKED', { message: 'Message should be equal to CLICKED' });
+        if (nodeMajorVersion === '16') {
+            await global.wdioExpect(messageEl).toHaveText('CLICKED', { message: 'Message should be equal to CLICKED' });
+        } else {
+            await expect(messageEl).toHaveText('CLICKED', { message: 'Message should be equal to CLICKED' });
+        }
         //
         // Jasmine syntax
         expect(await messageEl.getText()).withContext('Message should be equal to CLICKED').toBe('CLICKED');
