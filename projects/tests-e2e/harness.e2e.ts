@@ -20,7 +20,7 @@ describe('Angular Material Harness', () => {
     }
 
     beforeEach(async () => {
-        await browser.url('http://localhost:4200');
+        await browser.url('http://127.0.0.1:4200');
     });
 
     it('MatButton', async () => {
