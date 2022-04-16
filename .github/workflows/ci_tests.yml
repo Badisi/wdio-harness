@@ -74,8 +74,7 @@ jobs:
           npm install -g http-server
           cd dist/tests-app
           http-server --port=4200 --ssl --cert=../../cert.pem &
-          sleep 5 &&
-          curl https://127.0.0.1:4200 -I
+          sleep 5
 
       - name: Run tests
         run: npm run start:tests-e2e -- -- --watch=false --debug=true --headless=true
