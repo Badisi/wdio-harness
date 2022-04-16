@@ -34,7 +34,7 @@ export const config: WebdriverIO.Config = {
     }],
     logLevel: debug ? 'debug' : 'warn',
     bail: 0,
-    baseUrl: 'http://127.0.0.1',
+    baseUrl: 'https://127.0.0.1',
     waitforTimeout: 10000,
     connectionRetryTimeout: 120000,
     connectionRetryCount: 3,
