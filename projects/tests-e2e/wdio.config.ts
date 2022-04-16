@@ -29,10 +29,6 @@ export const config: WebdriverIO.Config = {
         'goog:chromeOptions': {
             args: headless ? ['--headless', '--disable-gpu', '--disable-dev-shm-usage', '--verbose'] : []
         },
-        loggingPrefs: {
-            browser: "ALL",
-            driver: "ALL"
-        },
         maxInstances: 5,
         acceptInsecureCerts: true
     }],
