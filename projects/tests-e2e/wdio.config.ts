@@ -30,19 +30,13 @@ export const config: WebdriverIO.Config = {
             args: headless ? ['--headless', '--disable-gpu', '--disable-dev-shm-usage', '--verbose'] : []
         },
         loggingPrefs: {
-            browser: {
-                browser: "ALL",
-                driver: "ALL"
-            },
-            driver: {
-                browser: "ALL",
-                driver: "ALL"
-            }
+            browser: "ALL",
+            driver: "ALL"
         },
         maxInstances: 5,
         acceptInsecureCerts: true
     }],
-    logLevel: debug ? 'debug' : 'warn',
+    logLevel: debug ? 'trace' : 'warn',
     bail: 0,
     baseUrl: 'http://127.0.0.1',
     waitforTimeout: 10000,
