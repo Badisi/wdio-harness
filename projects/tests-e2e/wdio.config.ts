@@ -27,7 +27,7 @@ export const config: WebdriverIO.Config = {
     capabilities: [{
         browserName: 'chrome',
         'goog:chromeOptions': {
-            args: headless ? ['--headless', '--disable-gpu', '--disable-dev-shm-usage', '--verbose'] : []
+            args: headless ? ['--headless', '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--verbose'] : []
         },
         maxInstances: 5,
         acceptInsecureCerts: true
