@@ -27,14 +27,15 @@ export const config: WebdriverIO.Config = {
     capabilities: [{
         browserName: 'chrome',
         'goog:chromeOptions': {
-            args: headless ? ['--headless', '--disable-gpu', '--disable-dev-shm-usage'] : []
+            args: headless ? ['--headless', '--disable-gpu', '--disable-dev-shm-usage', '--ignore-certificate-errors'] : []
         },
         maxInstances: 5,
         acceptInsecureCerts: true
     }],
+    strictSSL: false,
     logLevel: debug ? 'debug' : 'warn',
     bail: 0,
-    baseUrl: 'https://127.0.0.1',
+    baseUrl: 'http://127.0.0.1',
     waitforTimeout: 10000,
     connectionRetryTimeout: 120000,
     connectionRetryCount: 3,
