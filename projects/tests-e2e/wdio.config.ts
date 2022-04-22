@@ -46,6 +46,11 @@ export const config: WebdriverIO.Config = {
         defaultTimeoutInterval: debug ? (24 * 60 * 60 * 1000) : 60000
     },
     autoCompileOpts: {
+        tsNodeOpts: {
+            moduleTypes: {
+                './**/*.e2e.ts': 'esm'
+            }
+        },
         tsConfigPathsOpts: {
             baseUrl: './',
             paths: {
