@@ -102,4 +102,4 @@ Please read and follow the [Code of Conduct][codeofconduct] and help me keep thi
 [contributing]: https://github.com/badisi/wdio-harness/blob/main/CONTRIBUTING.md
 [codeofconduct]: https://github.com/badisi/wdio-harness/blob/main/CODE_OF_CONDUCT.md
 [wdio]: https://webdriver.io/
-[examples]: https://github.com/badisi/wdio-harness/blob/main/projects/tests/harness.e2e.ts
+[examples]: https://github.com/badisi/wdio-harness/blob/main/projects/tests-e2e/harness.e2e.ts
