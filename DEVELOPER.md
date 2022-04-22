@@ -23,19 +23,19 @@ You can test the library while developing it, as follow:
 1. Start the testing application
 
    ```sh
-   npm start
+   npm run start:tests-app
    ```
 
 2. Make any modifications
 
    * to the **library**: in `projects/library/src/`
    * to the **testing application**: in `projects/tests-app/src/`
-   * to the **tests**: in `projects/tests/harness.e2e.ts`
+   * to the **tests**: in `projects/tests-e2e/harness.e2e.ts`
 
-3. Run the test
+3. Run the tests
 
    ```sh
-   npm run test
+   npm run start:tests-e2e
    ```
 
 ## Building the library
