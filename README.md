@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-    <i>🔬 [WebdriverIO][wdio] support for Angular component test harnesses.</i><br/>
+    <i>🔬 <a href="https://webdriver.io" alt="wdio">WebdriverIO</a> support for Angular component test harnesses.</i><br/>
 </p>
 
 <p align="center">
@@ -115,5 +115,4 @@ Please read and follow the [Code of Conduct][codeofconduct] and help me keep thi
 [developer]: https://github.com/badisi/wdio-harness/blob/main/DEVELOPER.md
 [contributing]: https://github.com/badisi/wdio-harness/blob/main/CONTRIBUTING.md
 [codeofconduct]: https://github.com/badisi/wdio-harness/blob/main/CODE_OF_CONDUCT.md
-[wdio]: https://webdriver.io/
 [examples]: https://github.com/badisi/wdio-harness/blob/main/projects/tests-e2e/harness.e2e.ts
