@@ -37,7 +37,7 @@
         "build": "node ./build.mjs"
     },
     "peerDependencies": {
-        "@angular/cdk": ">= 10 < 13",
+        "@angular/cdk": ">= 13 < 16",
         "@wdio/logger": ">= 7 < 8",
         "webdriverio": ">= 7 < 8"
     },
