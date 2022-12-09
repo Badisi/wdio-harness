@@ -1,13 +1,31 @@
-# @badisi/wdio-harness
+<h1 align="center">
+    @badisi/wdio-harness
+</h1>
 
-🔬 [WebdriverIO][wdio] support for Angular component test harnesses.
+<p align="center">
+    <i>🔬 [WebdriverIO][wdio] support for Angular component test harnesses.</i><br/>
+</p>
 
-[![npm version](https://img.shields.io/npm/v/@badisi/wdio-harness.svg?color=blue&logo=npm)][npm]
-[![npm downloads](https://img.shields.io/npm/dw/@badisi/wdio-harness.svg?color=7986CB&logo=npm)][npm-dl]
-[![license](https://img.shields.io/npm/l/@badisi/wdio-harness.svg?color=ff69b4)][license]
+<p align="center">
+    <a href="https://www.npmjs.com/package/@badisi/wdio-harness">
+        <img src="https://img.shields.io/npm/v/@badisi/wdio-harness.svg?color=blue&logo=npm" alt="npm version" />
+    </a>
+    <a href="https://npmcharts.com/compare/@badisi/wdio-harness?minimal=true">
+        <img src="https://img.shields.io/npm/dw/@badisi/wdio-harness.svg?color=7986CB&logo=npm" alt="npm donwloads" />
+    </a>
+    <a href="https://github.com/badisi/wdio-harness/blob/main/LICENSE">
+        <img src="https://img.shields.io/npm/l/@badisi/wdio-harness.svg?color=ff69b4" alt="license" />
+    </a>
+</p>
 
-[![build status](https://github.com/badisi/wdio-harness/workflows/CI%20tests/badge.svg)][ci-tests]
-[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)][pullrequest]
+<p align="center">
+    <a href="https://github.com/Badisi/wdio-harness/actions/workflows/ci_tests.yml">
+        <img src="https://github.com/Badisi/wdio-harness/actions/workflows/ci_tests.yml/badge.svg" alt="build status" />
+    </a>
+    <a href="https://github.com/badisi/wdio-harness/blob/main/CONTRIBUTING.md#-submitting-a-pull-request-pr">
+        <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
+    </a>
+</p>
 
 <hr/>
 
@@ -17,6 +35,7 @@
 
 [More info](https://material.angular.io/cdk/test-harnesses/overview)
 
+<hr/>
 
 ## Installation
 
@@ -93,11 +112,6 @@ Please read and follow the [Code of Conduct][codeofconduct] and help me keep thi
 
 
 
-[npm]: https://www.npmjs.com/package/@badisi/wdio-harness
-[npm-dl]: https://npmcharts.com/compare/@badisi/wdio-harness?minimal=true
-[ci-tests]: https://github.com/badisi/wdio-harness/actions?query=workflow:CI%20tests
-[pullrequest]: https://github.com/badisi/wdio-harness/blob/main/CONTRIBUTING.md#-submitting-a-pull-request-pr
-[license]: https://github.com/badisi/wdio-harness/blob/main/LICENSE
 [developer]: https://github.com/badisi/wdio-harness/blob/main/DEVELOPER.md
 [contributing]: https://github.com/badisi/wdio-harness/blob/main/CONTRIBUTING.md
 [codeofconduct]: https://github.com/badisi/wdio-harness/blob/main/CODE_OF_CONDUCT.md
