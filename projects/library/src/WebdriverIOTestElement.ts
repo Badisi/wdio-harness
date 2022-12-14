@@ -9,7 +9,8 @@ import {
 } from '@angular/cdk/testing';
 import logger from '@wdio/logger';
 
-import { magenta, green } from '@colors/colors/safe';
+import colors from '@colors/colors/safe.js';
+const { magenta, green } = colors;
 
 enum Button {
     LEFT = 'left',
@@ -79,13 +80,13 @@ export class WebdriverIOTestElement implements TestElement {
     constructor(readonly element: WebdriverIO.Element) { }
 
     /** Blur the element. */
-    blur(): Promise<void> {
+    async blur(): Promise<void> {
         this.logAction('BLUR');
         return browser.executeScript('arguments[0].blur()', [this.element]);
     }
 
     /** Clear the element's input (for input and textarea elements only). */
-    clear(): Promise<void> {
+    async clear(): Promise<void> {
         this.logAction('CLEAR');
         return this.element.clearValue();
     }
@@ -95,17 +96,17 @@ export class WebdriverIOTestElement implements TestElement {
      * the element is clicked at a specific location, consider using `click('center')` or
      * `click(x, y)` instead.
      */
-    click(modifiers?: ModifierKeys): Promise<void>;
+    async click(modifiers?: ModifierKeys): Promise<void>;
     /** Click the element at the element's center. */
-    click(location: 'center', modifiers?: ModifierKeys): Promise<void>;
+    async click(location: 'center', modifiers?: ModifierKeys): Promise<void>;
     /**
      * Click the element at the specified coordinates relative to the top-left of the element.
      * @param relativeX Coordinate within the element, along the X-axis at which to click.
      * @param relativeY Coordinate within the element, along the Y-axis at which to click.
      * @param modifiers Modifier keys held while clicking
      */
-    click(relativeX: number, relativeY: number, modifiers?: ModifierKeys): Promise<void>;
-    click(...args: [ModifierKeys?] | ['center', ModifierKeys?] | [number, number, ModifierKeys?]): Promise<void> {
+    async click(relativeX: number, relativeY: number, modifiers?: ModifierKeys): Promise<void>;
+    async click(...args: [ModifierKeys?] | ['center', ModifierKeys?] | [number, number, ModifierKeys?]): Promise<void> {
         this.logAction('CLICK');
         return this.dispatchClickEventSequence(args, Button.LEFT);
     }
@@ -116,14 +117,14 @@ export class WebdriverIOTestElement implements TestElement {
      * @param relativeY Coordinate within the element, along the Y-axis at which to click.
      * @param modifiers Modifier keys held while clicking
      */
-    rightClick(relativeX: number, relativeY: number, modifiers?: ModifierKeys): Promise<void>;
-    rightClick(...args: [ModifierKeys?] | ['center', ModifierKeys?] | [number, number, ModifierKeys?]): Promise<void> {
+    async rightClick(relativeX: number, relativeY: number, modifiers?: ModifierKeys): Promise<void>;
+    async rightClick(...args: [ModifierKeys?] | ['center', ModifierKeys?] | [number, number, ModifierKeys?]): Promise<void> {
         this.logAction('RIGHT_CLICK');
         return this.dispatchClickEventSequence(args, Button.RIGHT);
     }
 
     /** Focus the element. */
-    focus(): Promise<void> {
+    async focus(): Promise<void> {
         this.logAction('FOCUS');
         return browser.executeScript('arguments[0].focus()', [this.element]);
     }
@@ -131,17 +132,17 @@ export class WebdriverIOTestElement implements TestElement {
     /** Get the computed value of the given CSS property for the element. */
     async getCssValue(property: string): Promise<string> {
         this.logAction('GET_CSS_VALUE');
-        return (await this.element.getCSSProperty(property)).value || '';
+        return (await this.element.getCSSProperty(property)).value ?? '';
     }
 
     /** Hovers the mouse over the element. */
-    hover(): Promise<void> {
+    async hover(): Promise<void> {
         this.logAction('HOVER');
         return this.element.moveTo();
     }
 
     /** Moves the mouse away from the element. */
-    mouseAway(): Promise<void> {
+    async mouseAway(): Promise<void> {
         this.logAction('MOUSE_AWAY');
         return this.element.moveTo({ xOffset: -1, yOffset: -1 });
     }
@@ -150,18 +151,18 @@ export class WebdriverIOTestElement implements TestElement {
      * Sends the given string to the input as a series of key presses. Also fires input events
      * and attempts to add the string to the Element's value.
      */
-    sendKeys(...keys: (string | TestKey)[]): Promise<void>;
+    async sendKeys(...keys: (string | TestKey)[]): Promise<void>;
     /**
      * Sends the given string to the input as a series of key presses. Also fires input events
      * and attempts to add the string to the Element's value.
      */
-    sendKeys(modifiers: ModifierKeys, ...keys: (string | TestKey)[]): Promise<void>;
-    sendKeys(...modifiersAndKeys: any[]): Promise<void> {
+    async sendKeys(modifiers: ModifierKeys, ...keys: (string | TestKey)[]): Promise<void>;
+    async sendKeys(...modifiersAndKeys: any[]): Promise<void> {
         let modifiers: ModifierKeys;
         let rest: (string | TestKey)[];
 
         const first = modifiersAndKeys[0];
-        if (typeof first !== 'string' && typeof first !== 'number') {
+        if (first !== undefined && typeof first !== 'string' && typeof first !== 'number') {
             modifiers = first;
             rest = modifiersAndKeys.slice(1);
         } else {
@@ -182,11 +183,14 @@ export class WebdriverIOTestElement implements TestElement {
             }, [] as string[]);
 
         this.logAction('SEND_KEYS', `[${keys.join(', ')}]`);
-        return this.element.setValue(keys);
+        if (keys.length !== 0) {
+            await this.focus();
+            return browser.keys(keys);
+        }
     }
 
     /** Gets the text from the element. */
-    text(options?: TextOptions): Promise<string> {
+    async text(options?: TextOptions): Promise<string> {
         this.logAction('TEXT', `{ exclude: ${options?.exclude} }`);
         if (options?.exclude) {
             return browser.executeScript(`
@@ -195,15 +199,15 @@ export class WebdriverIOTestElement implements TestElement {
                 for (let i = 0; i < exclusions.length; i++) {
                     exclusions[i].remove();
                 }
-                return (clone.textContent || '').trim();
+                return (clone.textContent ?? '').trim();
             `, [this.element, options.exclude]);
         }
         // We don't go through WebdriverIO's `getText`, because it excludes text from hidden elements.
-        return browser.executeScript(`return (arguments[0].textContent || '').trim()`, [this.element]);
+        return browser.executeScript(`return (arguments[0].textContent ?? '').trim()`, [this.element]);
     }
 
     /** Gets the value for the given attribute from the element. */
-    getAttribute(name: string): Promise<string | null> {
+    async getAttribute(name: string): Promise<string | null> {
         this.logAction('GET_ATTRIBUTE', name);
         return this.element.getAttribute(name);
     }
@@ -224,27 +228,27 @@ export class WebdriverIOTestElement implements TestElement {
     }
 
     /** Gets the value of a property of an element. */
-    getProperty(name: string): Promise<any> {
+    async getProperty(name: string): Promise<any> {
         this.logAction('GET_PROPERTY', name);
         return this.element.getProperty(name);
     }
 
     /** Checks whether this element matches the given selector. */
-    matchesSelector(selector: string): Promise<boolean> {
+    async matchesSelector(selector: string): Promise<boolean> {
         this.logAction('MATCHES_SELECTOR', selector);
         return browser.executeScript(`
-            return (Element.prototype.matches || Element.prototype.msMatchesSelector).call(arguments[0], arguments[1])
+            return (Element.prototype.matches ?? Element.prototype.msMatchesSelector).call(arguments[0], arguments[1])
         `, [this.element, selector]);
     }
 
     /** Checks whether the element is focused. */
-    isFocused(): Promise<boolean> {
+    async isFocused(): Promise<boolean> {
         this.logAction('IS_FOCUSED');
         return this.element.isFocused();
     }
 
     /** Sets the value of a property of an input. */
-    setInputValue(value: string): Promise<void> {
+    async setInputValue(value: string): Promise<void> {
         this.logAction('SET_INPUT_VALUE', value);
         return this.element.setValue(value);
     }
@@ -274,7 +278,7 @@ export class WebdriverIOTestElement implements TestElement {
     }
 
     /** Dispatches an event with a particular name. */
-    dispatchEvent(name: string, data?: Record<string, EventData>): Promise<void> {
+    async dispatchEvent(name: string, data?: Record<string, EventData>): Promise<void> {
         this.logAction('DISPATCH_EVENT', name);
         return browser.executeScript(`
             const event = document.createEvent('Event');
@@ -284,6 +288,26 @@ export class WebdriverIOTestElement implements TestElement {
             }
             arguments[1]['dispatchEvent'](event);
         `, [name, this.element, data]);
+    }
+
+    /** Performs a key-down action. */
+    async keyDown(value: string): Promise<void> {
+        this.logAction('KEY_DOWN:', value);
+        return browser.performActions([{
+            id: 'keyboard',
+            type: 'key',
+            actions: [{ type: 'keyDown', value }],
+        }]);
+    }
+
+    /** Performs a key-up action. */
+    async keyUp(value: string): Promise<void> {
+        this.logAction('KEY_UP:', value);
+        return browser.performActions([{
+            id: 'keyboard',
+            type: 'key',
+            actions: [{ type: 'keyUp', value }],
+        }]);
     }
 
     // --- HELPER(s) ---
@@ -311,26 +335,6 @@ export class WebdriverIOTestElement implements TestElement {
         for (const modifierKey of modifierKeys) {
             this.keyUp(modifierKey);
         }
-    }
-
-    /** Performs a key-down action. */
-    keyDown(value: string): Promise<void> {
-        this.logAction('KEY_DOWN:', value);
-        return browser.performActions([{
-            id: 'keyboard',
-            type: 'key',
-            actions: [{ type: 'keyDown', value }],
-        }]);
-    }
-
-    /** Performs a key-up action. */
-    keyUp(value: string): Promise<void> {
-        this.logAction('KEY_UP:', value);
-        return browser.performActions([{
-            id: 'keyboard',
-            type: 'key',
-            actions: [{ type: 'keyUp', value }],
-        }]);
     }
 
     /** Writes info to the console outputs. */

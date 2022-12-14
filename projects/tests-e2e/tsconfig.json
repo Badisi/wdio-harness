@@ -1,18 +1,16 @@
 {
     "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "baseUrl": "./",
-        "paths": {
-            "@badisi/wdio-harness": [
-                "../library/src"
-            ]
-        },
+	    "moduleResolution": "node",
+        "module": "ESNext",
+        "target": "es2022",
+        "lib": [
+            "es2020",
+            "dom"
+        ],
         "types": [
             "node",
-            "webdriverio/async",
-            "expect-webdriverio/jasmine",
-            "@wdio/local-runner",
+            "@wdio/globals/types",
+            "expect-webdriverio",
             "@wdio/jasmine-framework"
         ]
     }

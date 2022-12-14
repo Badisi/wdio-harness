@@ -48,12 +48,6 @@ const customizePackageJson = () => {
     delete pkgJson.scripts;
     delete pkgJson.devDependencies;
     writeFileSync(pkgJsonPath, JSON.stringify(pkgJson, null, 4), { encoding: 'utf8' });
-
-    const pkgJsonCjsPath = pathResolve(DIST_PATH, 'cjs', 'package.json');
-    writeFileSync(pkgJsonCjsPath, JSON.stringify({ type: 'commonjs' }, null, 4), { encoding: 'utf8' });
-
-    const pkgJsonEsmPath = pathResolve(DIST_PATH, 'esm', 'package.json');
-    writeFileSync(pkgJsonEsmPath, JSON.stringify({ type: 'module' }, null, 4), { encoding: 'utf8' });
 };
 
 const build = async () => {
@@ -61,8 +55,7 @@ const build = async () => {
     await cleanDir(DIST_PATH);
 
     log('> Building library..');
-    await execCmd('tsc --project tsconfig-cjs.json', { cwd: __dirname });
-    await execCmd('tsc --project tsconfig-esm.json', { cwd: __dirname });
+    await execCmd('tsc --project tsconfig.json', { cwd: __dirname });
 
     log('> Copying assets..');
     await copyAssets();

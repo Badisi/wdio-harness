@@ -1,9 +1,10 @@
 import { HarnessEnvironment, HarnessLoader, TestElement } from '@angular/cdk/testing';
 import logger from '@wdio/logger';
 
-import { magenta, green } from '@colors/colors/safe';
+import { WebdriverIOTestElement } from './WebdriverIOTestElement.js';
 
-import { WebdriverIOTestElement } from './WebdriverIOTestElement';
+import colors from '@colors/colors/safe.js';
+const { magenta, green } = colors;
 
 /** Registers the environment logger. */
 const log = logger('wdio-harness');

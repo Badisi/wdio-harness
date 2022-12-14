@@ -2,21 +2,23 @@
     "compilerOptions": {
         "baseUrl": "src",
         "rootDir": "src",
+        "outDir": "../../dist/",
+        "module": "ESNext",
+        "target": "es2022",
         "moduleResolution": "node",
         "lib": [
-            "es2018",
+            "es2020",
             "dom"
         ],
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
-        "declaration": true,
         "esModuleInterop": true,
+        "declaration": true,
         "inlineSourceMap": false,
         "listEmittedFiles": false,
         "listFiles": false,
         "noFallthroughCasesInSwitch": true,
         "pretty": true,
-        "resolveJsonModule": true,
         "skipLibCheck": true,
         "strict": true,
         "traceResolution": false,
@@ -25,7 +27,7 @@
         "noUnusedLocals": true,
         "types": [
             "node",
-            "webdriverio/async"
+            "@wdio/globals/types"
         ]
     },
     "compileOnSave": false,

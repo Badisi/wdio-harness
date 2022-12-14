@@ -1,6 +1,6 @@
-import { ComponentHarness, HarnessLoader, HarnessQuery } from '@angular/cdk/testing/';
+import { ComponentHarness, HarnessLoader, HarnessQuery } from '@angular/cdk/testing';
 
-import { WebdriverIOHarnessEnvironment } from './WebdriverIOHarnessEnvironment';
+import { WebdriverIOHarnessEnvironment } from './WebdriverIOHarnessEnvironment.js';
 
 /**
  * Returns a base harness environment instance.
