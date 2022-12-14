@@ -31,8 +31,8 @@
                             "projects/tests-app/src/assets"
                         ],
                         "styles": [
-                            "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-                            "projects/tests-app/src/styles.scss"
+                          "@angular/material/prebuilt-themes/indigo-pink.css",
+                          "projects/tests-app/src/styles.scss"
                         ],
                         "scripts": []
                     },
@@ -41,7 +41,7 @@
                             "budgets": [
                                 {
                                     "type": "initial",
-                                    "maximumWarning": "600kb",
+                                    "maximumWarning": "700kb",
                                     "maximumError": "1mb"
                                 },
                                 {
