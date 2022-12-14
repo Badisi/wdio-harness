@@ -35,6 +35,9 @@
     "scripts": {
         "build": "node ./build.mjs"
     },
+    "engines": {
+        "node": "^16.13 || >=18"
+    },
     "peerDependencies": {
         "@angular/cdk": ">= 13 < 16",
         "@wdio/logger": ">= 8 < 9",
