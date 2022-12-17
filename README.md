@@ -62,11 +62,6 @@ __Methods__
 __Example__
 
 ```ts
-/** CommonJS */
-// const { MatDatepickerInputHarness } = require('@angular/material/datepicker/testing');
-// const { getHarness } = require('@badisi/wdio-harness');
-
-/** ESM / Typescript */
 import { MatDatepickerInputHarness } from '@angular/material/datepicker/testing';
 import { getHarness } from '@badisi/wdio-harness';
 
