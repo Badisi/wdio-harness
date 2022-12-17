@@ -5,8 +5,10 @@ import {
     ModifierKeys,
     TestElement,
     TestKey,
-    TextOptions
+    TextOptions,
+    ComponentHarness
 } from '@angular/cdk/testing';
+import { browser } from '@wdio/globals';
 import logger from '@wdio/logger';
 
 import colors from '@colors/colors/safe.js';
@@ -55,6 +57,19 @@ const keyMap = {
     [TestKey.META]: 'Meta'
 };
 
+/** Module augmentation to expose the host element as a public api */
+declare module '@angular/cdk/testing' {
+    interface ComponentHarness {
+        element(): WebdriverIO.Element;
+    }
+    interface TestElement {
+        element(): WebdriverIO.Element;
+    }
+}
+ComponentHarness.prototype.element = function (this: ComponentHarness): WebdriverIO.Element {
+    return this.locatorFactory.rootElement.element();
+};
+
 /** Converts a `ModifierKeys` object to a list of WebdriverIO `Key`s. */
 const toWebdriverIOModifierKeys = (modifiers: ModifierKeys): string[] => {
     const result: string[] = [];
@@ -77,18 +92,23 @@ const toWebdriverIOModifierKeys = (modifiers: ModifierKeys): string[] => {
  * A `TestElement` implementation for WebdriverIO.
  */
 export class WebdriverIOTestElement implements TestElement {
-    constructor(readonly element: WebdriverIO.Element) { }
+    constructor(readonly hostElement: WebdriverIO.Element) { }
+
+    /** Return the host element. */
+    element(): WebdriverIO.Element {
+        return this.hostElement;
+    }
 
     /** Blur the element. */
     async blur(): Promise<void> {
         this.logAction('BLUR');
-        return browser.executeScript('arguments[0].blur()', [this.element]);
+        return browser.executeScript('arguments[0].blur()', [this.hostElement]);
     }
 
     /** Clear the element's input (for input and textarea elements only). */
     async clear(): Promise<void> {
         this.logAction('CLEAR');
-        return this.element.clearValue();
+        return this.hostElement.clearValue();
     }
 
     /**
@@ -126,25 +146,25 @@ export class WebdriverIOTestElement implements TestElement {
     /** Focus the element. */
     async focus(): Promise<void> {
         this.logAction('FOCUS');
-        return browser.executeScript('arguments[0].focus()', [this.element]);
+        return browser.executeScript('arguments[0].focus()', [this.hostElement]);
     }
 
     /** Get the computed value of the given CSS property for the element. */
     async getCssValue(property: string): Promise<string> {
         this.logAction('GET_CSS_VALUE');
-        return (await this.element.getCSSProperty(property)).value ?? '';
+        return (await this.hostElement.getCSSProperty(property)).value ?? '';
     }
 
     /** Hovers the mouse over the element. */
     async hover(): Promise<void> {
         this.logAction('HOVER');
-        return this.element.moveTo();
+        return this.hostElement.moveTo();
     }
 
     /** Moves the mouse away from the element. */
     async mouseAway(): Promise<void> {
         this.logAction('MOUSE_AWAY');
-        return this.element.moveTo({ xOffset: -1, yOffset: -1 });
+        return this.hostElement.moveTo({ xOffset: -1, yOffset: -1 });
     }
 
     /**
@@ -200,16 +220,16 @@ export class WebdriverIOTestElement implements TestElement {
                     exclusions[i].remove();
                 }
                 return (clone.textContent ?? '').trim();
-            `, [this.element, options.exclude]);
+            `, [this.hostElement, options.exclude]);
         }
         // We don't go through WebdriverIO's `getText`, because it excludes text from hidden elements.
-        return browser.executeScript(`return (arguments[0].textContent ?? '').trim()`, [this.element]);
+        return browser.executeScript(`return (arguments[0].textContent ?? '').trim()`, [this.hostElement]);
     }
 
     /** Gets the value for the given attribute from the element. */
     async getAttribute(name: string): Promise<string | null> {
         this.logAction('GET_ATTRIBUTE', name);
-        return this.element.getAttribute(name);
+        return this.hostElement.getAttribute(name);
     }
 
     /** Checks whether the element has the given class. */
@@ -222,15 +242,15 @@ export class WebdriverIOTestElement implements TestElement {
     /** Gets the dimensions of the element. */
     async getDimensions(): Promise<ElementDimensions> {
         this.logAction('GET_DIMENSIONS');
-        const { width, height } = await this.element.getSize();
-        const { x: left, y: top } = await this.element.getLocation();
+        const { width, height } = await this.hostElement.getSize();
+        const { x: left, y: top } = await this.hostElement.getLocation();
         return { width, height, left, top };
     }
 
     /** Gets the value of a property of an element. */
     async getProperty(name: string): Promise<any> {
         this.logAction('GET_PROPERTY', name);
-        return this.element.getProperty(name);
+        return this.hostElement.getProperty(name);
     }
 
     /** Checks whether this element matches the given selector. */
@@ -238,26 +258,26 @@ export class WebdriverIOTestElement implements TestElement {
         this.logAction('MATCHES_SELECTOR', selector);
         return browser.executeScript(`
             return (Element.prototype.matches ?? Element.prototype.msMatchesSelector).call(arguments[0], arguments[1])
-        `, [this.element, selector]);
+        `, [this.hostElement, selector]);
     }
 
     /** Checks whether the element is focused. */
     async isFocused(): Promise<boolean> {
         this.logAction('IS_FOCUSED');
-        return this.element.isFocused();
+        return this.hostElement.isFocused();
     }
 
     /** Sets the value of a property of an input. */
     async setInputValue(value: string): Promise<void> {
         this.logAction('SET_INPUT_VALUE', value);
-        return this.element.setValue(value);
+        return this.hostElement.setValue(value);
     }
 
     /** Selects the options at the specified indexes inside of a native `select` element. */
     async selectOptions(...optionIndexes: number[]): Promise<void> {
         this.logAction('SELECT_OPTIONS', `[${optionIndexes.join(', ')}]`);
 
-        const options = await this.element.$$('option');
+        const options = await this.hostElement.$$('option');
         const indexes = new Set(optionIndexes); // Convert to a set to remove duplicates.
 
         if (options.length && indexes.size) {
@@ -287,7 +307,7 @@ export class WebdriverIOTestElement implements TestElement {
                 Object.assign(event, arguments[2]);
             }
             arguments[1]['dispatchEvent'](event);
-        `, [name, this.element, data]);
+        `, [name, this.hostElement, data]);
     }
 
     /** Performs a key-down action. */
@@ -327,11 +347,11 @@ export class WebdriverIOTestElement implements TestElement {
         // no args remain after popping the modifiers from the args passed to this function.
         const offsetArgs = (args.length === 2 ? { xOffset: Number(args[0]), yOffset: Number(args[1]) } : undefined);
 
-        await this.element.moveTo(offsetArgs);
+        await this.hostElement.moveTo(offsetArgs);
         for (const modifierKey of modifierKeys) {
             this.keyDown(modifierKey);
         }
-        await this.element.click({ button });
+        await this.hostElement.click({ button });
         for (const modifierKey of modifierKeys) {
             this.keyUp(modifierKey);
         }
@@ -339,6 +359,6 @@ export class WebdriverIOTestElement implements TestElement {
 
     /** Writes info to the console outputs. */
     private logAction(action: string, args?: string): void {
-        log.info(`${magenta(action)} ${green(this.element.selector.toString())} ${args ? args : ''}`);
+        log.info(`${magenta(action)} ${green(this.hostElement.selector.toString())} ${args ? args : ''}`);
     }
 }
