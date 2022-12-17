@@ -3,7 +3,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "start": "wdio run wdio.config.ts --watch=true --debug=true --headless=false"
+        "start": "wdio run wdio.config.ts --watch=false --debug=true --headless=true"
     },
     "devDependencies": {
         "@wdio/cli": "^8.0.13",
