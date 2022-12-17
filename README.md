@@ -54,6 +54,7 @@ __Methods__
 
 - `createHarnessEnvironment(rootElement)` - gets a HarnessLoader instance from a given element (defaults to body)
 - `getHarness(harnessType, element)` - searches for an harness instance from a given ComponentHarness class and element
+- `getHarness(harnessType)` - searches for an harness instance from a given ComponentHarness class
 - `getHarness(query)` - searches for an harness instance from a given HarnessPredicate
 - `getAllHarnesses(query)` - acts like getHarness, but returns an array of harness instances
 - `waitForAngular()` - waits for Angular to finish bootstrapping
