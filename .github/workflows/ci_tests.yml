@@ -41,8 +41,8 @@ jobs:
         if: ${{ matrix.os == 'windows-latest' }}
         run: npm install -g npm@8.3.1
 
-      - name: Install latest npm
-        run: npm install -g npm@latest
+      - name: Install global dependencies
+        run: npm install -g npm@latest http-server
 
       # - name: Install latest Chrome
       #   if: ${{ matrix.os == 'ubuntu-latest' }}
@@ -70,12 +70,13 @@ jobs:
         run: npm run build:tests-app
 
       - name: Serve tests application
-        run: |
-          npm install -g http-server
-          cd dist/tests-app
-          http-server --port=4200 &
-          sleep 5 &&
-          curl http://localhost:4200 -I
+        working-directory: dist/tests-app
+        shell: bash # use bash because powershell is used by default on Windows and background job are cleaned after the run
+        run: http-server --port=4200 &
+
+      - name: Make sure tests application is running
+        shell: bash # use bash so that sleep is recognized even on Windows
+        run: sleep 5 && curl http://localhost:4200 -I
 
       - name: Run tests
         run: npm run start:tests-e2e -- -- --watch=false --debug=false --headless=true
