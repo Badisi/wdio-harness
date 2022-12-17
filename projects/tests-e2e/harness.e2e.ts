@@ -11,7 +11,7 @@ describe('Angular Material Harness', () => {
     });
 
     it('MatButton - click()', async () => {
-        const button = await getHarness(MatButtonHarness);
+        const button = await getHarness(MatButtonHarness.with({ selector: '#demo-button' }));
         await button.click();
 
         const messageEl = $('.message');
@@ -25,8 +25,7 @@ describe('Angular Material Harness', () => {
     });
 
     it('MatSelect - select()', async () => {
-        const select = await getHarness(MatSelectHarness.with({ selector: '#demo-select' }));
-
+        const select = await getHarness(MatSelectHarness);
         await select.open();
         const options = await select.getOptions();
         expect(options.length).withContext('Select should have 3 options').toBe(3);
@@ -36,7 +35,6 @@ describe('Angular Material Harness', () => {
 
     it('MatDatePicker - setValue()', async () => {
         const datepicker = await getHarness(MatDatepickerInputHarness.with({ selector: '#demo-datepicker-input' }));
-
         await datepicker.setValue('9/27/1954');
         expect(await datepicker.getValue()).withContext('Date should be 9/27/1954').toBe('9/27/1954');
     });
