@@ -9,8 +9,7 @@
         ],
         "types": [
             "node",
-            "@wdio/globals/types",
-            "expect-webdriverio",
+            "expect-webdriverio/jasmine",
             "@wdio/jasmine-framework"
         ]
     }

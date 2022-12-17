@@ -24,6 +24,7 @@ export const config: Options.Testrunner = {
     // Runner Configuration
     // ====================
     runner: 'local',
+    injectGlobals: false,
     autoCompileOpts: {
         tsNodeOpts: {
             project: 'tsconfig.json'
