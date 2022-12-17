@@ -52,8 +52,9 @@ yarn add @badisi/wdio-harness --dev
 
 __Methods__
 
-- `createHarnessEnvironment(documentRoot)` - gets a HarnessLoader instance for the given HTML element
-- `getHarness(query)` - searches for an instance of the given ComponentHarness class or HarnessPredicate
+- `createHarnessEnvironment(rootElement)` - gets a HarnessLoader instance from a given element (defaults to body)
+- `getHarness(harnessType, element)` - searches for an harness instance from a given ComponentHarness class and element
+- `getHarness(query)` - searches for an harness instance from a given HarnessPredicate
 - `getAllHarnesses(query)` - acts like getHarness, but returns an array of harness instances
 - `waitForAngular()` - waits for Angular to finish bootstrapping
 
@@ -66,12 +67,11 @@ __Example__
 
 /** ESM / Typescript */
 import { MatDatepickerInputHarness } from '@angular/material/datepicker/testing';
-import { getHarness, waitForAngular } from '@badisi/wdio-harness';
+import { getHarness } from '@badisi/wdio-harness';
 
 describe('Angular Material Harness', () => {
     beforeEach(async () => {
         await browser.url('http://localhost:4200');
-        await waitForAngular();
     });
 
     it('MatDatePicker', async () => {
