@@ -5,44 +5,42 @@ import { WebdriverIOHarnessEnvironment } from './WebdriverIOHarnessEnvironment.j
 
 /**
  * Searches for all instances of the component corresponding to the given harness type under the
- * `HarnessLoader`'s root element, and returns a list `ComponentHarness` for each instance.
+ * `HarnessLoader`'s root element, and returns a list of `ComponentHarness` for each instance.
  * @param query A query for a harness to create
- * @return A list instances of the given harness type.
+ * @return A list of instances of the given harness type
  */
- export const getAllHarnesses = async <T extends ComponentHarness>(
+export const getAllHarnesses = async <T extends ComponentHarness>(
     query: HarnessQuery<T>
 ): Promise<T[]> => {
     return (await createHarnessEnvironment()).getAllHarnesses(query);
 };
 
-export async function getHarness<T extends ComponentHarness>(harnessType: ComponentHarnessConstructor<T>, element: WebdriverIO.Element): Promise<T>;
-export async function getHarness<T extends ComponentHarness>(query: HarnessQuery<T>): Promise<T>;
 /**
  * Searches for an instance of the component corresponding to the given harness type or host element
  * under the `HarnessLoader`'s root element, and returns a `ComponentHarness` for that instance. If
  * multiple matching components are found, a harness for the first one is returned. If no matching
  * component is found, an error is thrown.
- * @param queryOrHarnessType A query or a harness type for a harness to create
+ * @param query A query for a harness to create
  * @param element A raw host element for a harness to create
  * @return An instance of the given harness type
- * @throws If a matching component instance can't be found.
+ * @throws If a matching component instance can't be found
  */
-export async function getHarness<T extends ComponentHarness>(
-    queryOrHarnessType: HarnessQuery<T> | ComponentHarnessConstructor<T>,
+export const getHarness = async <T extends ComponentHarness>(
+    query: HarnessQuery<T>,
     element?: WebdriverIO.Element
-): Promise<T> {
-    const env = await createHarnessEnvironment();
-    if (Object.prototype.hasOwnProperty.call(queryOrHarnessType, 'hostSelector')) {
-        return env.createComponentHarness(queryOrHarnessType as ComponentHarnessConstructor<T>, element as WebdriverIO.Element);
+): Promise<T> => {
+    const env = await createHarnessEnvironment(element);
+    if (element) {
+        return env.createComponentHarness(query as ComponentHarnessConstructor<T>, element);
     }
-    return env.getHarness(queryOrHarnessType);
+    return env.getHarness(query);
 };
 
 /**
  * Returns a base harness environment instance.
  * @return An HarnessLoader instance for the current HTML document, rooted at the document's root element
  */
- export const createHarnessEnvironment = async (
+export const createHarnessEnvironment = async (
     rootElement?: WebdriverIO.Element
 ): Promise<WebdriverIOHarnessEnvironment> => {
     return WebdriverIOHarnessEnvironment.loader(rootElement || await $('body'));

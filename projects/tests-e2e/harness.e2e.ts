@@ -11,7 +11,7 @@ describe('Angular Material Harness', () => {
     });
 
     it('MatButton - click()', async () => {
-        const button = await getHarness(MatButtonHarness.with({ selector: '#demo-button' }));
+        const button = await getHarness(MatButtonHarness);
         await button.click();
 
         const messageEl = $('.message');

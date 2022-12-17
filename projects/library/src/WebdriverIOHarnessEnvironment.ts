@@ -51,8 +51,8 @@ export class WebdriverIOHarnessEnvironment extends HarnessEnvironment<WebdriverI
     /** Creates a `ComponentHarness` for the given harness type with the given raw host element. */
     createComponentHarness<T extends ComponentHarness>(
         harnessType: ComponentHarnessConstructor<T>,
-        element: WebdriverIO.Element): T
-    {
+        element: WebdriverIO.Element
+    ): T {
         return super.createComponentHarness(harnessType, element);
     }
 
