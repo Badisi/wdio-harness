@@ -30,13 +30,13 @@ describe('Angular Material Harness', () => {
         const options = await select.getOptions();
         expect(options.length).withContext('Select should have 3 options').toBe(3);
         await options[2].click();
-        expect(await select.getValueText()).withContext('"Tacos" should be selected').toBe('Tacos');
+        await expectAsync(select.getValueText()).withContext('"Tacos" should be selected').toBeResolvedTo('Tacos');
     });
 
     it('MatDatePicker - setValue()', async () => {
         const datepicker = await getHarness(MatDatepickerInputHarness.with({ selector: '#demo-datepicker-input' }));
         await datepicker.setValue('9/27/1954');
-        expect(await datepicker.getValue()).withContext('Date should be 9/27/1954').toBe('9/27/1954');
+        await expectAsync(datepicker.getValue()).withContext('Date should be 9/27/1954').toBeResolvedTo('9/27/1954');
     });
 
     it('MatDatePicker - selectCell()', async () => {
@@ -56,6 +56,6 @@ describe('Angular Material Harness', () => {
         const cell = await getHarness(MatCalendarCellHarness, cellElement);
         await cell.select();
         /** -- */
-        expect(await datepicker.getValue()).withContext('Date should be 10/20/1954').toBe('10/20/1954');
+        await expectAsync(datepicker.getValue()).withContext('Date should be 10/20/1954').toBeResolvedTo('10/20/1954');
     });
 });

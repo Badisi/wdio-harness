@@ -9,6 +9,7 @@ import {
     ComponentHarness
 } from '@angular/cdk/testing';
 import { browser } from '@wdio/globals';
+import { Element as WebdriverIOElement } from 'webdriverio';
 import logger from '@wdio/logger';
 
 import colors from '@colors/colors/safe.js';
@@ -60,13 +61,13 @@ const keyMap = {
 /** Module augmentation to expose the host element as a public api */
 declare module '@angular/cdk/testing' {
     interface ComponentHarness {
-        element(): WebdriverIO.Element;
+        element(): WebdriverIOElement;
     }
     interface TestElement {
-        element(): WebdriverIO.Element;
+        element(): WebdriverIOElement;
     }
 }
-ComponentHarness.prototype.element = function (this: ComponentHarness): WebdriverIO.Element {
+ComponentHarness.prototype.element = function (this: ComponentHarness): WebdriverIOElement {
     return this.locatorFactory.rootElement.element();
 };
 
@@ -92,10 +93,10 @@ const toWebdriverIOModifierKeys = (modifiers: ModifierKeys): string[] => {
  * A `TestElement` implementation for WebdriverIO.
  */
 export class WebdriverIOTestElement implements TestElement {
-    constructor(readonly hostElement: WebdriverIO.Element) { }
+    constructor(readonly hostElement: WebdriverIOElement) { }
 
     /** Return the host element. */
-    element(): WebdriverIO.Element {
+    element(): WebdriverIOElement {
         return this.hostElement;
     }
 
