@@ -44,7 +44,8 @@ jobs:
       - name: Install global dependencies
         run: npm install -g npm@latest http-server
 
-      # - name: Install latest Chrome
+      - name: Install latest Chrome
+        uses: browser-actions/setup-chrome@v1
       #   if: ${{ matrix.os == 'ubuntu-latest' }}
       #   run: |
       #     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
