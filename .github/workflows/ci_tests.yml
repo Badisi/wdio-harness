@@ -44,14 +44,29 @@ jobs:
       - name: Install global dependencies
         run: npm install -g npm@latest http-server
 
-      - name: Install latest Chrome
-        uses: browser-actions/setup-chrome@v1
-      #   if: ${{ matrix.os == 'ubuntu-latest' }}
-      #   run: |
-      #     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-      #     sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-      #     sudo apt-get update
-      #     sudo apt-get install google-chrome-stable
+      - name: Install latest Chrome (Windows)
+        if: ${{ runner.os == 'Windows' }}
+        run: |
+          $ChromeInstallerFile = "googlechromestandaloneenterprise64.msi"
+          $ChromeInstallerUrl = "https://dl.google.com/tag/s/dl/chrome/install/${ChromeInstallerFile}"
+          $ChromeInstallerPath = Join-Path -Path "${env:Temp}" -ChildPath $ChromeInstallerFile
+          (New-Object System.Net.WebClient).DownloadFile($ChromeInstallerUrl, $ChromeInstallerPath)
+          Start-Process -FilePath msiexec.exe -ArgumentList "/i $ChromeInstallerPath /QN /norestart" -Wait -PassThru
+
+      - name: Install latest Chrome (Linux)
+        if: ${{ runner.os == 'Linux' }}
+        run: |
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+          sudo apt-get update
+          sudo apt-get install google-chrome-stable
+
+      - name: Install latest Chrome (macOS)
+        if: ${{ runner.os == 'macOS' }}
+        run: |
+          wget -q https://dl.google.com/chrome/mac/universal/stable/GGRO/googlechrome.dmg
+          hdiutil attach -quiet -noautofsck -noautoopen googlechrome.dmg
+          sudo cp -r /Volumes/Google\ Chrome/Google\ Chrome.app /Applications/
 
       - name: Cache node_modules
         uses: actions/cache@v3
