@@ -39,7 +39,7 @@
         "node": "^16.13 || >=18"
     },
     "peerDependencies": {
-        "@angular/cdk": ">= 13 < 16",
+        "@angular/cdk": ">= 13 < 17",
         "@wdio/logger": ">= 8 < 9",
         "webdriverio": ">= 8 < 9"
     },
@@ -47,9 +47,9 @@
         "@colors/colors": "^1.5.0"
     },
     "devDependencies": {
-        "@angular/cdk": "^15.2.8",
-        "@wdio/logger": "^8.6.6",
-        "webdriverio": "^8.8.6",
-        "cpy": "^9.0.1"
+        "@angular/cdk": "^16.0.3",
+        "@wdio/logger": "^8.10.6",
+        "webdriverio": "^8.10.7",
+        "cpy": "^10.1.0"
     }
 }
