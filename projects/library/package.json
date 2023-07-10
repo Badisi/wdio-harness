@@ -9,11 +9,14 @@
     },
     "type": "module",
     "module": "index.js",
-    "types": "index.d.ts",
+    "typings": "index.d.ts",
     "exports": {
         ".": {
-            "import": "./index.js"
-        }
+            "types": "./index.d.ts",
+            "import": "./index.js",
+            "default": "./index.js"
+        },
+        "./package.json": "./package.json"
     },
     "repository": {
         "type": "git",
@@ -44,12 +47,12 @@
         "webdriverio": ">= 8 < 9"
     },
     "dependencies": {
-        "@colors/colors": "^1.5.0"
+        "@colors/colors": "^1.6.0"
     },
     "devDependencies": {
-        "@angular/cdk": "^16.1.2",
+        "@angular/cdk": "^16.1.4",
         "@wdio/logger": "^8.11.0",
-        "webdriverio": "^8.11.2",
+        "webdriverio": "^8.12.1",
         "cpy": "^10.1.0"
     }
 }
