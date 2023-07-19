@@ -50,9 +50,9 @@
         "@colors/colors": "^1.6.0"
     },
     "devDependencies": {
-        "@angular/cdk": "^16.1.4",
+        "@angular/cdk": "^16.1.5",
         "@wdio/logger": "^8.11.0",
-        "webdriverio": "^8.12.1",
+        "webdriverio": "^8.13.4",
         "cpy": "^10.1.0"
     }
 }
