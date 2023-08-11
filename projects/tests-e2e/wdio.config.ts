@@ -1,4 +1,4 @@
-import type { Options } from '@wdio/types'
+import type { Options } from '@wdio/types';
 
 const argv = process.argv.slice(2).reverse();
 const getArgValue = (argName: string): unknown => {
@@ -45,6 +45,7 @@ export const config: Options.Testrunner = {
     capabilities: [{
         maxInstances: 5,
         browserName: 'chrome',
+        browserVersion: 'stable',
         acceptInsecureCerts: true,
         'goog:chromeOptions': {
             args: headless ? ['--headless', '--disable-gpu', '--disable-dev-shm-usage'] : [debug ? '--auto-open-devtools-for-tabs' : '']
