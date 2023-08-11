@@ -25,7 +25,7 @@ enum Button {
 const log = logger('wdio-harness');
 
 /** Maps the `TestKey` constants to WebdriverIO's `Key` constants. */
-const keyMap = {
+const keyMap: Record<number, string> = {
     [TestKey.BACKSPACE]: 'Backspace',
     [TestKey.TAB]: 'Tab',
     [TestKey.ENTER]: 'Enter',
