@@ -52,7 +52,7 @@
     "devDependencies": {
         "@angular/cdk": "^16.2.9",
         "@wdio/logger": "^8.16.17",
-        "webdriverio": "^8.19.0",
+        "webdriverio": "^8.20.0",
         "cpy": "^10.1.0"
     }
 }
