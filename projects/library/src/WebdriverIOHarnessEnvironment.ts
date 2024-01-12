@@ -1,5 +1,5 @@
 import { ComponentHarness, ComponentHarnessConstructor, HarnessEnvironment } from '@angular/cdk/testing';
-import { Element as WebdriverIOElement, ElementArray as WebdriverIOElementArray } from 'webdriverio';
+import { Element as WebdriverIOElement } from 'webdriverio';
 import logger from '@wdio/logger';
 
 import { WebdriverIOTestElement } from './WebdriverIOTestElement.js';
@@ -58,9 +58,9 @@ export class WebdriverIOHarnessEnvironment extends HarnessEnvironment<WebdriverI
     }
 
     /** Gets a list of all elements matching the given selector under this environment's root element. */
-    protected async getAllRawElements(selector: string): Promise<WebdriverIOElementArray> {
+    protected async getAllRawElements(selector: string): Promise<WebdriverIOElement[]> {
         log.info(`${magenta('GET_ALL_RAW_ELEMENTS')} ${green(selector.toString())}`);
-        return await this.rawRootElement.$$(selector);
+        return [...(await this.rawRootElement.$$(selector))];
     }
 
     /** Gets the root element for the document. */
