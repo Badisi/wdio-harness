@@ -55,7 +55,8 @@ const keyMap: Record<number, string> = {
     [TestKey.F10]: 'F10',
     [TestKey.F11]: 'F11',
     [TestKey.F12]: 'F12',
-    [TestKey.META]: 'Meta'
+    [TestKey.META]: 'Meta',
+    [TestKey.COMMA]: ','
 };
 
 /** Module augmentation to expose the host element as a public api */
