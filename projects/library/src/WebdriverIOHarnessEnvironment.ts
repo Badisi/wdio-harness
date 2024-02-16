@@ -1,5 +1,4 @@
 import { ComponentHarness, ComponentHarnessConstructor, HarnessEnvironment } from '@angular/cdk/testing';
-import { Element as WebdriverIOElement } from 'webdriverio';
 import logger from '@wdio/logger';
 
 import { WebdriverIOTestElement } from './WebdriverIOTestElement.js';
@@ -13,23 +12,23 @@ const log = logger('wdio-harness');
 /**
  * A `HarnessEnvironment` implementation for WebdriverIO.
  */
-export class WebdriverIOHarnessEnvironment extends HarnessEnvironment<WebdriverIOElement> {
+export class WebdriverIOHarnessEnvironment extends HarnessEnvironment<WebdriverIO.Element> {
     /**
      * Keep a reference to the `document` element because `rawRootElement`
      * will be the root element of the harness's environment.
      */
-    private documentRoot: WebdriverIOElement;
+    private documentRoot: WebdriverIO.Element;
 
     protected constructor(
-        rawRootElement: WebdriverIOElement,
-        options: { documentRoot: WebdriverIOElement; }
+        rawRootElement: WebdriverIO.Element,
+        options: { documentRoot: WebdriverIO.Element; }
     ) {
         super(rawRootElement);
         this.documentRoot = options.documentRoot;
     }
 
     /** Creates a `HarnessLoader` rooted at the document root. */
-    static async loader(documentRoot: WebdriverIOElement): Promise<WebdriverIOHarnessEnvironment> {
+    static async loader(documentRoot: WebdriverIO.Element): Promise<WebdriverIOHarnessEnvironment> {
         return new WebdriverIOHarnessEnvironment(documentRoot, { documentRoot });
     }
 
@@ -52,29 +51,29 @@ export class WebdriverIOHarnessEnvironment extends HarnessEnvironment<WebdriverI
     /** Creates a `ComponentHarness` for the given harness type with the given raw host element. */
     createComponentHarness<T extends ComponentHarness>(
         harnessType: ComponentHarnessConstructor<T>,
-        element: WebdriverIOElement
+        element: WebdriverIO.Element
     ): T {
         return super.createComponentHarness(harnessType, element);
     }
 
     /** Gets a list of all elements matching the given selector under this environment's root element. */
-    protected async getAllRawElements(selector: string): Promise<WebdriverIOElement[]> {
+    protected async getAllRawElements(selector: string): Promise<WebdriverIO.Element[]> {
         log.info(`${magenta('GET_ALL_RAW_ELEMENTS')} ${green(selector.toString())}`);
         return [...(await this.rawRootElement.$$(selector))];
     }
 
     /** Gets the root element for the document. */
-    protected getDocumentRoot(): WebdriverIOElement {
+    protected getDocumentRoot(): WebdriverIO.Element {
         return this.documentRoot;
     }
 
     /** Creates a `TestElement` from a raw element. */
-    protected createTestElement(element: WebdriverIOElement): WebdriverIOTestElement {
+    protected createTestElement(element: WebdriverIO.Element): WebdriverIOTestElement {
         return new WebdriverIOTestElement(element);
     }
 
     /** Creates a `HarnessLoader` rooted at the given raw element. */
-    protected createEnvironment(element: WebdriverIOElement): HarnessEnvironment<WebdriverIOElement> {
+    protected createEnvironment(element: WebdriverIO.Element): HarnessEnvironment<WebdriverIO.Element> {
         return new WebdriverIOHarnessEnvironment(element, {
             documentRoot: this.documentRoot
         });
