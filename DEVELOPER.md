@@ -1,18 +1,19 @@
 # Development
 
-This document describes how you can test, build and publish the library.
+This document describes how you can test, build and publish this project.
 
 ## Prerequisite
 
-Before you can build and test this library you must install and configure the following products on your development machine:
+Before you can start you must install and configure the following products on your development machine:
 
 * [Node.js][nodejs]
 * [Git][git]
 
-You will then need to install the library required dependencies:
+You will then need to clone this project and install the required dependencies:
 
 ```sh
-cd <library-path>
+git clone <repository_url> <dir_name>
+cd <dir_name>
 npm install
 ```
 
@@ -50,7 +51,7 @@ npm run build:lib
 
 This project comes with automatic continuous delivery (CD) using *GitHub Actions*.
 
-1. Bump the library version in `./package.json`
+1. Bump the library version in `./projects/library/package.json`
 2. Push the changes
 3. Create a new: [GitHub release](https://github.com/badisi/wdio-harness/releases/new)
 4. Watch the results in: [Actions](https://github.com/badisi/wdio-harness/actions)
