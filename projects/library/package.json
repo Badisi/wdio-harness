@@ -12,8 +12,8 @@
     "typings": "index.d.ts",
     "exports": {
         ".": {
-            "types": "./index.d.ts",
             "import": "./index.js",
+            "types": "./index.d.ts",
             "default": "./index.js"
         },
         "./package.json": "./package.json"
