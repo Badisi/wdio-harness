@@ -25,14 +25,11 @@
     ],
     "private": true,
     "scripts": {
-        "ncu": "npx npm-check-updates -i --format=group --packageFile '{,projects/**/}package.json'",
-        "start:tests-app": "ng serve",
-        "start:tests-e2e": "npm run start --prefix=projects/tests-e2e",
-        "build:lib": "npm run build --prefix=projects/library",
-        "build:tests-app": "ng build"
+        "ncu": "npx npm-check-updates -i --format=group --packageFile '{,projects/**/}package.json'"
     },
     "workspaces": [
         "projects/library",
+        "projects/tests-app",
         "projects/tests-e2e"
     ],
     "devDependencies": {

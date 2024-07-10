@@ -1,0 +1,8 @@
+{
+    "name": "tests-app",
+    "private": true,
+    "scripts": {
+        "start": "ng serve",
+        "build": "ng build"
+    }
+}

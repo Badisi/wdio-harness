@@ -24,7 +24,8 @@ You can test the library while developing it, as follow:
 1. Start the testing application
 
    ```sh
-   npm run start:tests-app
+   cd <project_path>/tests-app
+   npm run start
    ```
 
 2. Make any modifications
@@ -36,7 +37,8 @@ You can test the library while developing it, as follow:
 3. Run the tests
 
    ```sh
-   npm run start:tests-e2e
+   cd <project_path>/tests-e2e
+   npm run start
    ```
 
 ## Building the library
@@ -44,7 +46,8 @@ You can test the library while developing it, as follow:
 The library will be built in the `./dist` directory.
 
 ```sh
-npm run build:lib
+cd <project_path>/library
+npm run build
 ```
 
 ## Publishing to NPM repository

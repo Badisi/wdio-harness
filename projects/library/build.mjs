@@ -47,6 +47,7 @@ const customizePackageJson = () => {
     const pkgJson = JSON.parse(readFileSync(pkgJsonPath, { encoding: 'utf8' }));
     delete pkgJson.scripts;
     delete pkgJson.devDependencies;
+    delete pkgJson.publishConfig;
     writeFileSync(pkgJsonPath, JSON.stringify(pkgJson, null, 4), { encoding: 'utf8' });
 };
 

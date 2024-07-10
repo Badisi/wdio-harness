@@ -1,14 +1,13 @@
 name: Run tests
 
 on:
+  workflow_dispatch:
+  workflow_call:
   push:
     branches:
     - '**'
     tags-ignore:
     - '**'
-  pull_request:
-  workflow_call:
-  workflow_dispatch:
 
 concurrency:
   group: run-tests-group-${{ github.ref }}
@@ -16,83 +15,36 @@ concurrency:
 
 jobs:
   ci_tests:
-    name: Tests on ${{ matrix.os }} node${{ matrix.node }}
-    runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: ['ubuntu-latest', 'macos-latest', 'windows-latest']
         node: [18, 20]
 
+    name: ${{ matrix.os }}_node${{ matrix.node }}
+    runs-on: ${{ matrix.os }}
     steps:
-      - name: Checkout sources
-        uses: actions/checkout@v4
-
-      - name: Setup node
-        uses: actions/setup-node@v4
+      - name: Setup
+        uses: dsi-hug/actions/setup@v2
         with:
-          node-version: ${{ matrix.node }}
-          registry-url: https://registry.npmjs.org/
-          cache: npm
-
-      # https://github.com/actions/setup-node/issues/411
-      # https://github.com/npm/cli/issues/4341
-      - name: Workaround for npm installation on Windows
-        if: ${{ matrix.os == 'windows-latest' }}
-        run: npm install -g npm@8.3.1
-
-      - name: Install global dependencies
-        run: npm install -g npm@latest http-server
-
-      - name: Install latest Chrome (Windows)
-        if: ${{ runner.os == 'Windows' }}
-        run: |
-          $ChromeInstallerFile = "googlechromestandaloneenterprise64.msi"
-          $ChromeInstallerUrl = "https://dl.google.com/tag/s/dl/chrome/install/${ChromeInstallerFile}"
-          $ChromeInstallerPath = Join-Path -Path "${env:Temp}" -ChildPath $ChromeInstallerFile
-          (New-Object System.Net.WebClient).DownloadFile($ChromeInstallerUrl, $ChromeInstallerPath)
-          Start-Process -FilePath msiexec.exe -ArgumentList "/i $ChromeInstallerPath /QN /norestart" -Wait -PassThru
-
-      - name: Install latest Chrome (Linux)
-        if: ${{ runner.os == 'Linux' }}
-        run: |
-          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-          sudo apt-get update
-          sudo apt-get install google-chrome-stable
-
-      - name: Install latest Chrome (macOS)
-        if: ${{ runner.os == 'macOS' }}
-        run: |
-          wget -q https://dl.google.com/chrome/mac/universal/stable/GGRO/googlechrome.dmg
-          hdiutil attach -quiet -noautofsck -noautoopen googlechrome.dmg
-          sudo cp -r /Volumes/Google\ Chrome/Google\ Chrome.app /Applications/
-
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        id: cache-step
-        with:
-          key: cache-${{ matrix.os }}-node${{ matrix.node }}-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            cache-${{ matrix.os }}-node${{ matrix.node }}-
-          path: |
-            node_modules
-
-      - name: Install dependencies
-        if: steps.cache-step.outputs.cache-hit != 'true'
-        run: npm clean-install --engine-strict
+            node-version: ${{ matrix.node }}
+            setup-chrome: true
 
       - name: Build tests application
-        run: npm run build:tests-app
+        working-directory: projects/tests-app
+        run: npm run build
 
       - name: Serve tests application
         working-directory: dist/tests-app
         shell: bash # use bash because powershell is used by default on Windows and background job are cleaned after the run
-        run: http-server --port=4200 &
+        # use global install (instead of npx) because otherwise the server won't stay up on Windows
+        run: |
+            npm install -g http-server
+            http-server --port=4200 &
 
       - name: Make sure tests application is running
         shell: bash # use bash so that sleep is recognized even on Windows
         run: sleep 5 && curl http://localhost:4200 -I
 
       - name: Run tests
-        run: npm run start:tests-e2e -- -- --watch=false --debug=false --headless=true
+        working-directory: projects/tests-e2e
+        run: npm run start -- --watch=false --debug=false --headless=true
