@@ -15,4 +15,5 @@ jobs:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     with:
       working-directory: projects/library
+      build: true
       release: true
