@@ -24,21 +24,19 @@ You can test the library while developing it, as follow:
 1. Start the testing application
 
    ```sh
-   cd <project_path>/tests-app
-   npm run start
+   npm run start -w projects/tests-app
    ```
 
 2. Make any modifications
 
-   * to the **library**: in `projects/library/src/`
-   * to the **testing application**: in `projects/tests-app/src/`
-   * to the **tests**: in `projects/tests-e2e/harness.e2e.ts`
+   * to the **library**: under `./projects/library/src/`
+   * to the **testing application**: under `./projects/tests-app/src/`
+   * to the **tests**: in `./projects/tests-e2e/harness.e2e.ts`
 
 3. Run the tests
 
    ```sh
-   cd <project_path>/tests-e2e
-   npm run start
+   npm run start -w projects/tests-e2e
    ```
 
 ## Building the library
@@ -46,8 +44,7 @@ You can test the library while developing it, as follow:
 The library will be built in the `./dist` directory.
 
 ```sh
-cd <project_path>/library
-npm run build
+npm run build -w projects/library
 ```
 
 ## Publishing to NPM repository
