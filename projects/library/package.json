@@ -37,7 +37,7 @@
     ],
     "scripts": {
         "build": "node ./build.mjs",
-        "release": "npm publish ../../dist"
+        "release": "npm publish ../../dist --workspaces=false --access=public"
     },
     "engines": {
         "node": "^16.14.0 || >=18.10.0"
