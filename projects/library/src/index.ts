@@ -43,7 +43,7 @@ export const getHarness = async <T extends ComponentHarness>(
 export const createHarnessEnvironment = async (
     rootElement?: WebdriverIO.Element
 ): Promise<WebdriverIOHarnessEnvironment> => {
-    return WebdriverIOHarnessEnvironment.loader(rootElement || await $('body'));
+    return WebdriverIOHarnessEnvironment.loader(rootElement ?? await $('//body').getElement());
 };
 
 /**

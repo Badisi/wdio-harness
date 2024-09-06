@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-	    "moduleResolution": "node",
+        "moduleResolution": "node",
         "module": "ESNext",
         "target": "es2022",
         "lib": [
@@ -9,8 +9,10 @@
         ],
         "types": [
             "node",
+            "jasmine",
+            "@wdio/globals/types",
             "expect-webdriverio/jasmine",
-            "@wdio/jasmine-framework"
+            "@wdio/jasmine-framework",
         ]
     }
 }

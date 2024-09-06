@@ -52,7 +52,7 @@ describe('Angular Material Harness', () => {
          * @error ERROR webdriver: Request failed with status 404 due to invalid session id: invalid session id
          * Moreover this api is not efficient as it loops through all the cells no matter the filter.
          */
-        const cellElement = await calendar.element().$('span.mat-calendar-body-cell-content=20');
+        const cellElement = await calendar.element().$('span.mat-calendar-body-cell-content=20').getElement();
         const cell = await getHarness(MatCalendarCellHarness, cellElement);
         await cell.select();
         /** -- */

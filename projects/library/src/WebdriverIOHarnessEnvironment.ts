@@ -59,7 +59,7 @@ export class WebdriverIOHarnessEnvironment extends HarnessEnvironment<WebdriverI
     /** Gets a list of all elements matching the given selector under this environment's root element. */
     protected async getAllRawElements(selector: string): Promise<WebdriverIO.Element[]> {
         log.info(`${magenta('GET_ALL_RAW_ELEMENTS')} ${green(selector.toString())}`);
-        return [...(await this.rawRootElement.$$(selector))];
+        return [...(await this.rawRootElement.$$(selector).getElements())];
     }
 
     /** Gets the root element for the document. */

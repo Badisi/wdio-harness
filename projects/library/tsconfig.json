@@ -26,7 +26,8 @@
         "strictPropertyInitialization": true,
         "noUnusedLocals": true,
         "types": [
-            "node"
+            "node",
+            "@wdio/globals/types"
         ]
     },
     "compileOnSave": false,

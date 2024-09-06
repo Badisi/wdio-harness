@@ -278,7 +278,7 @@ export class WebdriverIOTestElement implements TestElement {
     async selectOptions(...optionIndexes: number[]): Promise<void> {
         this.logAction('SELECT_OPTIONS', `[${optionIndexes.join(', ')}]`);
 
-        const options = await this.hostElement.$$('option');
+        const options = await this.hostElement.$$('option').getElements();
         const indexes = new Set(optionIndexes); // Convert to a set to remove duplicates.
 
         if (options.length && indexes.size) {

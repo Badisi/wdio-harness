@@ -25,11 +25,6 @@ export const config: Options.Testrunner = {
     // ====================
     runner: 'local',
     injectGlobals: false,
-    autoCompileOpts: {
-        tsNodeOpts: {
-            project: 'tsconfig.json'
-        }
-    },
     //
     // ==================
     // Specify Test Files
@@ -37,15 +32,18 @@ export const config: Options.Testrunner = {
     specs: [
         './**/*.e2e.ts'
     ],
+    filesToWatch: [
+        './src/**/*.ts'
+    ],
     //
     // ============
     // Capabilities
     // ============
     maxInstances: debug ? 1 : 100,
     capabilities: [{
-        maxInstances: 5,
         browserName: 'chrome',
         browserVersion: 'stable',
+        maxInstances: 5,
         acceptInsecureCerts: true,
         'goog:chromeOptions': {
             args: headless ? ['--headless', '--disable-gpu', '--disable-dev-shm-usage'] : [debug ? '--auto-open-devtools-for-tabs' : '']
