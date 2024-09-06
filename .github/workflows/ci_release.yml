@@ -10,7 +10,7 @@ jobs:
 
   ci_release:
     needs: ci_tests
-    uses: dsi-hug/actions/.github/workflows/action.yml@v2
+    uses: badisi/actions/.github/workflows/action.yml@v1
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     with:

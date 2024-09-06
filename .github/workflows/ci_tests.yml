@@ -5,9 +5,9 @@ on:
   workflow_call:
   push:
     branches:
-    - '**'
+      - "**"
     tags-ignore:
-    - '**'
+      - "**"
 
 concurrency:
   group: run-tests-group-${{ github.ref }}
@@ -17,17 +17,17 @@ jobs:
   ci_tests:
     strategy:
       matrix:
-        os: ['ubuntu-latest', 'macos-latest', 'windows-latest']
+        os: ["ubuntu-latest", "macos-latest", "windows-latest"]
         node: [18, 20]
 
     name: ${{ matrix.os }}_node${{ matrix.node }}
     runs-on: ${{ matrix.os }}
     steps:
       - name: Setup
-        uses: dsi-hug/actions/setup@v2
+        uses: badisi/actions/setup@v1
         with:
-            node-version: ${{ matrix.node }}
-            setup-chrome: true
+          node-version: ${{ matrix.node }}
+          setup-chrome: true
 
       - name: Build tests application
         working-directory: projects/tests-app
@@ -38,8 +38,8 @@ jobs:
         shell: bash # use bash because powershell is used by default on Windows and background job are cleaned after the run
         # use global install (instead of npx) because otherwise the server won't stay up on Windows
         run: |
-            npm install -g http-server
-            http-server --port=4200 &
+          npm install -g http-server
+          http-server --port=4200 &
 
       - name: Make sure tests application is running
         shell: bash # use bash so that sleep is recognized even on Windows
