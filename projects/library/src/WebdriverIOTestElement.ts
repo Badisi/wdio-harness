@@ -212,10 +212,10 @@ export class WebdriverIOTestElement implements TestElement {
 
     /** Gets the text from the element. */
     async text(options?: TextOptions): Promise<string> {
-        this.logAction('TEXT', `{ exclude: ${options?.exclude} }`);
+        this.logAction('TEXT', options?.exclude ? `{ exclude: ${options?.exclude} }` : undefined);
         if (options?.exclude) {
             return browser.executeScript(`
-                const clone = arguments[0].cloneNode(true) as Element;
+                const clone = arguments[0].cloneNode(true);
                 const exclusions = clone.querySelectorAll(arguments[1]);
                 for (let i = 0; i < exclusions.length; i++) {
                     exclusions[i].remove();
