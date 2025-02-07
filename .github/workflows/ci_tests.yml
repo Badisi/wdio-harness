@@ -17,7 +17,7 @@ jobs:
   ci_tests:
     strategy:
       matrix:
-        os: ["ubuntu-latest", "macos-latest", "windows-latest"]
+        os: ["macos-latest", "windows-latest"] # "ubuntu-latest" 
         node: [22]
 
     name: ${{ matrix.os }}_node${{ matrix.node }}
@@ -47,4 +47,4 @@ jobs:
 
       - name: Run tests
         working-directory: projects/tests-e2e
-        run: npm run start -- --watch=false --debug=false --headless=true
+        run: npm run start -- --watch=false --debug=true --headless=true

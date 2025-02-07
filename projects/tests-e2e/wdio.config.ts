@@ -46,7 +46,9 @@ export const config: Options.Testrunner = {
         maxInstances: 5,
         acceptInsecureCerts: true,
         'goog:chromeOptions': {
-            args: headless ? ['--headless', '--disable-gpu', '--disable-dev-shm-usage'] : [debug ? '--auto-open-devtools-for-tabs' : '']
+            args: headless ?
+                ['--headless', '--disable-gpu', '--disable-dev-shm-usage'] :
+                [debug ? '--auto-open-devtools-for-tabs' : '']
         }
     }],
     //
