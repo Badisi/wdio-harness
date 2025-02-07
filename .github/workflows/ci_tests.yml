@@ -18,13 +18,13 @@ jobs:
     strategy:
       matrix:
         os: ["ubuntu-latest", "macos-latest", "windows-latest"]
-        node: [18, 20]
+        node: [22]
 
     name: ${{ matrix.os }}_node${{ matrix.node }}
     runs-on: ${{ matrix.os }}
     steps:
       - name: Setup
-        uses: badisi/actions/setup@v1
+        uses: badisi/actions/setup@v2
         with:
           node-version: ${{ matrix.node }}
           setup-chrome: true
