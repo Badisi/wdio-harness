@@ -51,9 +51,9 @@
         "@colors/colors": "^1.6.0"
     },
     "devDependencies": {
-        "@angular/cdk": "^19.2.8",
+        "@angular/cdk": "^19.2.11",
         "@wdio/logger": "9.4.4",
-        "webdriverio": "9.12.3",
+        "webdriverio": "9.12.7",
         "cpy": "^11.1.0"
     },
     "publishConfig": {

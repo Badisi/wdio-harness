@@ -6,11 +6,11 @@
         "start": "wdio run wdio.config.ts --watch=false --debug=true --headless=true"
     },
     "devDependencies": {
-        "@wdio/cli": "9.12.3",
-        "@wdio/jasmine-framework": "9.12.3",
-        "@wdio/local-runner": "9.12.3",
-        "@wdio/spec-reporter": "9.12.3",
+        "@wdio/cli": "9.12.7",
+        "@wdio/jasmine-framework": "9.12.7",
+        "@wdio/local-runner": "9.12.7",
+        "@wdio/spec-reporter": "9.12.6",
         "ts-node": "^10.9.2",
-        "typescript": "^5.8.2"
+        "typescript": "^5.8.3"
     }
 }
