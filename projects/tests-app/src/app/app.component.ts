@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -9,9 +9,16 @@ import { MatOption, MatSelect } from '@angular/material/select';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
+    standalone: true,
     imports: [
-        NgFor, MatLabel, MatButton, MatSelect, MatInput, MatFormField, MatOption,
-        FormsModule, MatDatepickerModule
+        MatLabel,
+        MatButton,
+        MatSelect,
+        MatInput,
+        MatFormField,
+        MatOption,
+        FormsModule,
+        MatDatepickerModule
     ]
 })
 export class AppComponent {
