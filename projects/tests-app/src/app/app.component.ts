@@ -1,24 +1,21 @@
 
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
-import { MatOption, MatSelect } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     standalone: true,
     imports: [
-        MatLabel,
         MatButton,
-        MatSelect,
-        MatInput,
-        MatFormField,
-        MatOption,
-        FormsModule,
-        MatDatepickerModule
+        MatSelectModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatDatepickerModule,
     ]
 })
 export class AppComponent {
