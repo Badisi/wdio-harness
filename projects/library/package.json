@@ -52,8 +52,8 @@
     },
     "devDependencies": {
         "@angular/cdk": "^19.2.11",
-        "@wdio/logger": "9.4.4",
-        "webdriverio": "9.12.7",
+        "@wdio/logger": "9.16.2",
+        "webdriverio": "9.16.2",
         "cpy": "^11.1.0"
     },
     "publishConfig": {
