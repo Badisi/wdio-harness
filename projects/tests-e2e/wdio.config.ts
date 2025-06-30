@@ -42,7 +42,11 @@ export const config: Options.Testrunner = {
     maxInstances: debug ? 1 : 100,
     capabilities: [{
         browserName: 'chrome',
-        browserVersion: 'stable',
+        /**
+         * TODO: put back 'stable' when the issue with Chrome 138 is resolved
+         * @see https://github.com/webdriverio/webdriverio/issues/14601
+         */
+        browserVersion: '137', // 'stable',
         maxInstances: 5,
         acceptInsecureCerts: true,
         'goog:chromeOptions': {
