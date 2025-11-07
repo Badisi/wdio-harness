@@ -1,6 +1,6 @@
 {
     "name": "@badisi/wdio-harness",
-    "version": "4.2.1",
+    "version": "4.2.2",
     "description": "WebdriverIO support for Angular component test harnesses.",
     "homepage": "https://github.com/Badisi/wdio-harness",
     "license": "MIT",
