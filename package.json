@@ -1,14 +1,14 @@
 {
     "name": "@badisi/wdio-harness",
     "description": "WebdriverIO support for Angular component test harnesses.",
-    "homepage": "https://github.com/badisi/wdio-harness",
+    "homepage": "https://github.com/Badisi/wdio-harness",
     "license": "MIT",
     "author": {
         "name": "Badisi"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/badisi/wdio-harness.git"
+        "url": "https://github.com/Badisi/wdio-harness"
     },
     "keywords": [
         "angular",

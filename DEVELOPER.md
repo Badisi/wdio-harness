@@ -53,8 +53,8 @@ This project comes with automatic continuous delivery (CD) using *GitHub Actions
 
 1. Bump the library version in `./projects/library/package.json`
 2. Push the changes
-3. Create a new [GitHub release](https://github.com/badisi/wdio-harness/releases/new)
-4. Watch the results in: [Actions](https://github.com/badisi/wdio-harness/actions)
+3. Create a new [GitHub release](https://github.com/Badisi/wdio-harness/releases/new)
+4. Watch the results in: [Actions](https://github.com/Badisi/wdio-harness/actions)
 
 
 

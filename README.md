@@ -11,14 +11,14 @@
         <img src="https://img.shields.io/npm/v/@badisi/wdio-harness.svg?color=blue&logo=npm" alt="npm version" /></a>
     <a href="https://npmcharts.com/compare/@badisi/wdio-harness?minimal=true">
         <img src="https://img.shields.io/npm/dw/@badisi/wdio-harness.svg?color=7986CB&logo=npm" alt="npm donwloads" /></a>
-    <a href="https://github.com/badisi/wdio-harness/blob/main/LICENSE">
+    <a href="https://github.com/Badisi/wdio-harness/blob/main/LICENSE">
         <img src="https://img.shields.io/npm/l/@badisi/wdio-harness.svg?color=ff69b4" alt="license" /></a>
 </p>
 
 <p align="center">
     <a href="https://github.com/Badisi/wdio-harness/actions/workflows/ci_tests.yml">
-        <img src="https://github.com/Badisi/wdio-harness/actions/workflows/ci_tests.yml/badge.svg" alt="build status" /></a>
-    <a href="https://github.com/badisi/wdio-harness/blob/main/CONTRIBUTING.md#-submitting-a-pull-request-pr">
+        <img src="https://img.shields.io/github/actions/workflow/status/badisi/wdio-harness/ci_tests.yml?logo=github" alt="build status" /></a>
+    <a href="https://github.com/Badisi/wdio-harness/blob/main/CONTRIBUTING.md#-submitting-a-pull-request-pr">
         <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" /></a>
 </p>
 
@@ -103,7 +103,7 @@ Please read and follow the [Code of Conduct][codeofconduct] and help me keep thi
 
 
 
-[developer]: https://github.com/badisi/wdio-harness/blob/main/DEVELOPER.md
-[contributing]: https://github.com/badisi/wdio-harness/blob/main/CONTRIBUTING.md
-[codeofconduct]: https://github.com/badisi/wdio-harness/blob/main/CODE_OF_CONDUCT.md
-[examples]: https://github.com/badisi/wdio-harness/blob/main/projects/tests-e2e/harness.e2e.ts
+[developer]: https://github.com/Badisi/wdio-harness/blob/main/DEVELOPER.md
+[contributing]: https://github.com/Badisi/wdio-harness/blob/main/CONTRIBUTING.md
+[codeofconduct]: https://github.com/Badisi/wdio-harness/blob/main/CODE_OF_CONDUCT.md
+[examples]: https://github.com/Badisi/wdio-harness/blob/main/projects/tests-e2e/harness.e2e.ts
