@@ -1,5 +1,5 @@
-import { ComponentHarness, ComponentHarnessConstructor, HarnessQuery } from '@angular/cdk/testing';
-import { browser, $ } from '@wdio/globals';
+import type { ComponentHarness, ComponentHarnessConstructor, HarnessQuery } from '@angular/cdk/testing';
+import { $, browser } from '@wdio/globals';
 
 import { WebdriverIOHarnessEnvironment } from './WebdriverIOHarnessEnvironment.js';
 

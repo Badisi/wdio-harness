@@ -1,9 +1,8 @@
-import { ComponentHarness, ComponentHarnessConstructor, HarnessEnvironment } from '@angular/cdk/testing';
+import { type ComponentHarness, type ComponentHarnessConstructor, HarnessEnvironment } from '@angular/cdk/testing';
+import colors from '@colors/colors/safe.js';
 import logger from '@wdio/logger';
-
 import { WebdriverIOTestElement } from './WebdriverIOTestElement.js';
 
-import colors from '@colors/colors/safe.js';
 const { magenta, green } = colors;
 
 /** Registers the environment logger. */

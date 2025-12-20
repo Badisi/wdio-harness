@@ -43,7 +43,7 @@ export const config: Options.Testrunner = {
     capabilities: [{
         browserName: 'chrome',
         /**
-         * TODO: put back 'stable' when the issue with Chrome 138 is resolved
+         * TODO: put back 'stable' when the issue with Chrome >= 138 is resolved
          * @see https://github.com/webdriverio/webdriverio/issues/14601
          */
         browserVersion: '137', // 'stable',
@@ -68,6 +68,7 @@ export const config: Options.Testrunner = {
     framework: 'jasmine',
     reporters: ['spec'],
     jasmineOpts: {
-        defaultTimeoutInterval: debug ? (24 * 60 * 60 * 1000) : 60000
+        defaultTimeoutInterval: debug ? (24 * 60 * 60 * 1000) : 60000,
+        requires: ['test-setup.ts']
     }
 };

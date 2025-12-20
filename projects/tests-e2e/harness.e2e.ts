@@ -1,7 +1,7 @@
-import { MatCalendarCellHarness, MatDatepickerInputHarness } from '@angular/material/datepicker/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
+import { MatCalendarCellHarness, MatDatepickerInputHarness } from '@angular/material/datepicker/testing';
 import { MatSelectHarness } from '@angular/material/select/testing';
-import { browser, $, expect as expectWdio } from '@wdio/globals';
+import { $, browser, expect as expectWdio } from '@wdio/globals';
 
 import { getHarness } from '../library/src/index.js';
 
@@ -20,8 +20,12 @@ describe('Angular Material Harness', () => {
         await expectWdio(messageEl).toHaveText('CLICKED', { message: 'Message should be equal to CLICKED' });
 
         // Jasmine syntax
-        expect(await messageEl.getText()).withContext('Message should be equal to CLICKED').toBe('CLICKED');
-        await expectAsync(messageEl.getText()).withContext('Message should be equal to CLICKED').toBeResolvedTo('CLICKED');
+        expect(await messageEl.getText())
+            .withContext('Message should be equal to CLICKED')
+            .toBe('CLICKED');
+        await expectAsync(messageEl.getText())
+            .withContext('Message should be equal to CLICKED')
+            .toBeResolvedTo('CLICKED');
     });
 
     it('MatSelect - select()', async () => {

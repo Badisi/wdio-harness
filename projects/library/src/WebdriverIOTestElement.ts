@@ -1,17 +1,16 @@
 import {
-    _getTextWithExcludedElements,
-    ElementDimensions,
-    EventData,
-    ModifierKeys,
-    TestElement,
+    ComponentHarness,
+    type ElementDimensions,
+    type EventData,
+    type ModifierKeys,
+    type TestElement,
     TestKey,
-    TextOptions,
-    ComponentHarness
+    type TextOptions
 } from '@angular/cdk/testing';
+import colors from '@colors/colors/safe.js';
 import { browser } from '@wdio/globals';
 import logger from '@wdio/logger';
 
-import colors from '@colors/colors/safe.js';
 const { magenta, green } = colors;
 
 enum Button {
@@ -225,6 +224,24 @@ export class WebdriverIOTestElement implements TestElement {
         }
         // We don't go through WebdriverIO's `getText`, because it excludes text from hidden elements.
         return browser.executeScript(`return (arguments[0].textContent ?? '').trim()`, [this.hostElement]);
+    }
+
+    /**
+     * Sets the value of a `contenteditable` element.
+     * @param value Value to be set on the element.
+    */
+    async setContenteditableValue(value: string): Promise<void> {
+        const contenteditableAttr = await this.getAttribute('contenteditable');
+
+        if (
+            contenteditableAttr !== '' &&
+            contenteditableAttr !== 'true' &&
+            contenteditableAttr !== 'plaintext-only'
+        ) {
+            throw new Error('setContenteditableValue can only be called on a `contenteditable` element.');
+        }
+
+        return browser.executeScript('arguments[0].textContent = arguments[1];', [this.hostElement, value]);
     }
 
     /** Gets the value for the given attribute from the element. */

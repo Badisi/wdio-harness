@@ -57,6 +57,7 @@ __Methods__
 __Example__
 
 ```ts
+import '@angular/compiler'; // required since Angular v21
 import { MatDatepickerInputHarness } from '@angular/material/datepicker/testing';
 import { getHarness } from '@badisi/wdio-harness';
 
