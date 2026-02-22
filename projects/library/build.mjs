@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument, @typescript-eslint/naming-convention, no-underscore-dangle */
 
-import { exec } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, resolve as pathResolve } from 'node:path';
+import { exec } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import colors from '@colors/colors/safe.js';
-import cpy from 'cpy';
+import { styleText } from 'node:util';
+import { cp } from 'node:fs/promises';
 
-const { green, magenta } = colors;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const DIST_PATH = pathResolve(__dirname, '../../dist');
 
-const log = str => console.log(magenta(str));
+const log = str => console.log(styleText('magenta', str));
 
 const execCmd = (cmd, opts) => new Promise((resolve, reject) => {
     exec(cmd, opts, (err, stdout, stderr) => {
@@ -37,9 +36,9 @@ const cleanDir = path => new Promise(resolve => {
 });
 
 const copyAssets = async () => {
-    await cpy('../../README.md', DIST_PATH, { flat: true });
-    await cpy('../../LICENSE', DIST_PATH, { flat: true });
-    await cpy('package.json', DIST_PATH, { flat: true });
+    await cp('../../README.md', pathResolve(DIST_PATH, 'README.md'));
+    await cp('../../LICENSE', pathResolve(DIST_PATH, 'LICENSE'));
+    await cp('package.json', pathResolve(DIST_PATH, 'package.json'));
 };
 
 const customizePackageJson = () => {
@@ -64,7 +63,7 @@ const build = async () => {
     log('> Customizing package.json..');
     customizePackageJson();
 
-    log(`> ${green('Done!')}\n`);
+    log(`> ${styleText('green', 'Done!')}\n`);
 };
 
 void (async () => {

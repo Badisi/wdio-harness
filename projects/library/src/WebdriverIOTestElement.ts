@@ -7,11 +7,9 @@ import {
     TestKey,
     type TextOptions
 } from '@angular/cdk/testing';
-import colors from '@colors/colors/safe.js';
 import { browser } from '@wdio/globals';
 import logger from '@wdio/logger';
-
-const { magenta, green } = colors;
+import { green, magenta } from './utils';
 
 enum Button {
     LEFT = 'left',
