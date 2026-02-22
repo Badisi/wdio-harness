@@ -51,10 +51,10 @@
         "@colors/colors": "^1.6.0"
     },
     "devDependencies": {
-        "@angular/cdk": "^21.0.5",
+        "@angular/cdk": "^21.1.5",
         "@wdio/logger": "9.18.0",
-        "webdriverio": "9.21.0",
-        "cpy": "^12.1.0"
+        "cpy": "^12.1.0",
+        "webdriverio": "9.24.0"
     },
     "publishConfig": {
         "access": "public"
