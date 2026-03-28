@@ -10,7 +10,7 @@ jobs:
 
   ci_release:
     needs: ci_tests
-    uses: badisi/actions/.github/workflows/action.yml@v4
+    uses: badisi/actions/.github/workflows/action.yml@v5
     with:
       working-directory: projects/library
       build: true
