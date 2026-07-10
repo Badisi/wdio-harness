@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-    <i>🔬 <a href="https://webdriver.io" alt="wdio">WebdriverIO</a> support for Angular component test harnesses.</i><br/>
+    🔬 <i><a href="https://webdriver.io" alt="wdio">WebdriverIO</a> support for Angular component test harnesses.</i><br/>
 </p>
 
 <p align="center">
