@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
     selector: 'app-root',
     templateUrl: './app.component.html',
     standalone: true,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
         MatButton,
         MatSelectModule,

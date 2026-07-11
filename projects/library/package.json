@@ -54,7 +54,7 @@
         "webdriverio": ">= 9 < 10"
     },
     "devDependencies": {
-        "@angular/cdk": "^21.2.14",
+        "@angular/cdk": "^22.0.4",
         "@wdio/globals": "9.29.1",
         "@wdio/logger": "9.29.1",
         "webdriverio": "9.29.1"
