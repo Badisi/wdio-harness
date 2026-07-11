@@ -1,0 +1,15 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "outDir": "../../dist/app",
+        "tsBuildInfoFile": "../../node_modules/.tmp/tsconfig.app.tsbuildinfo",
+        "types": []
+    },
+    "files": [
+        "src/main.ts"
+    ],
+    "include": [
+        "src/**/*.d.ts"
+    ]
+}

@@ -1,37 +1,18 @@
 {
+    "extends": "../../tsconfig.base.json",
     "compilerOptions": {
-        "baseUrl": "src",
-        "rootDir": "src",
         "outDir": "../../dist/",
-        "module": "ESNext",
-        "target": "es2022",
-        "moduleResolution": "bundler",
-        "lib": [
-            "es2020",
-            "dom"
-        ],
-        "allowJs": true,
-        "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true,
+        "tsBuildInfoFile": "../../node_modules/.tmp/tsconfig.lib.tsbuildinfo",
         "declaration": true,
-        "inlineSourceMap": false,
-        "listEmittedFiles": false,
-        "listFiles": false,
-        "noFallthroughCasesInSwitch": true,
-        "pretty": true,
-        "skipLibCheck": true,
-        "strict": true,
-        "traceResolution": false,
-        "importHelpers": true,
-        "strictPropertyInitialization": true,
-        "noUnusedLocals": true,
+        "declarationMap": true,
+        "composite": true,
         "types": [
             "node",
             "@wdio/globals/types"
         ]
     },
-    "compileOnSave": false,
     "include": [
+        "tsdown.config.ts",
         "src/**/*.ts"
     ]
 }

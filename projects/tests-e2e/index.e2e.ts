@@ -3,7 +3,7 @@ import { MatCalendarCellHarness, MatDatepickerInputHarness } from '@angular/mate
 import { MatSelectHarness } from '@angular/material/select/testing';
 import { $, browser, expect as expectWdio } from '@wdio/globals';
 
-import { getHarness } from '../library/src/index.js';
+import { getHarness } from '../library/src';
 
 describe('Angular Material Harness', () => {
     beforeEach(async () => {

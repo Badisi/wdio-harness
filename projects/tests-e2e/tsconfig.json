@@ -1,18 +1,17 @@
 {
+    "extends": "../../tsconfig.base.json",
     "compilerOptions": {
-        "moduleResolution": "bundler",
-        "module": "ESNext",
-        "target": "es2022",
-        "lib": [
-            "es2020",
-            "dom"
-        ],
+        "tsBuildInfoFile": "../../node_modules/.tmp/tsconfig.e2e.tsbuildinfo",
         "types": [
             "node",
             "jasmine",
             "@wdio/globals/types",
             "expect-webdriverio/jasmine",
-            "@wdio/jasmine-framework",
+            "@wdio/jasmine-framework"
         ]
-    }
+    },
+    "include": [
+        "wdio.config.ts",
+        "index.e2e.ts"
+    ]
 }

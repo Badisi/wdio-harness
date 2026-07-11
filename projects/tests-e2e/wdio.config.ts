@@ -1,5 +1,3 @@
-import type { Options } from '@wdio/types';
-
 const argv = process.argv.slice(2).reverse();
 const getArgValue = (argName: string): unknown => {
     const itemIndex = argv.findIndex(arg => arg.includes(`--${argName}`));
@@ -18,7 +16,7 @@ const headless = getArgValue('headless') === 'true';
 /**
  * https://webdriver.io/docs/configurationfile/
  */
-export const config: Options.Testrunner = {
+export const config: WebdriverIO.Config = {
     //
     // ====================
     // Runner Configuration
@@ -42,13 +40,9 @@ export const config: Options.Testrunner = {
     maxInstances: debug ? 1 : 100,
     capabilities: [{
         browserName: 'chrome',
-        /**
-         * TODO: put back 'stable' when the issue with Chrome >= 138 is resolved
-         * @see https://github.com/webdriverio/webdriverio/issues/14601
-         */
-        browserVersion: '137', // 'stable',
-        maxInstances: 5,
+        browserVersion: 'stable',
         acceptInsecureCerts: true,
+        'wdio:maxInstances': 5,
         'goog:chromeOptions': {
             args: headless ?
                 ['--headless', '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'] :

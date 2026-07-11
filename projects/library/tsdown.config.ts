@@ -1,0 +1,27 @@
+import { copyFileSync, readFileSync, writeFileSync } from 'node:fs';
+import { defineConfig, type UserConfig } from 'tsdown';
+
+const config: UserConfig[] = defineConfig([{
+    outDir: '../../dist',
+    entry: ['src/index.ts'],
+    format: ['esm'],
+    clean: true,
+    sourcemap: false,
+    dts: {
+        compilerOptions: {
+            declarationMap: false
+        }
+    },
+    onSuccess: (): void => {
+        const pkgJson = JSON.parse(readFileSync('package.json', 'utf8')) as Record<string, unknown>;
+        delete pkgJson['scripts'];
+        delete pkgJson['publishConfig'];
+        delete pkgJson['devDependencies'];
+        writeFileSync('../../dist/package.json', JSON.stringify(pkgJson, null, 4));
+
+        copyFileSync('../../README.md', '../../dist/README.md');
+        copyFileSync('../../LICENSE', '../../dist/LICENSE');
+    },
+}]);
+
+export default config;
