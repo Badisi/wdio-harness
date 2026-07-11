@@ -3,7 +3,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "start": "NODE_TLS_REJECT_UNAUTHORIZED=0 wdio run wdio.config.ts --watch=false --debug=true --headless=false"
+        "start": "wdio run wdio.config.ts --watch=false --debug=true --headless=false"
     },
     "devDependencies": {
         "@wdio/cli": "9.29.1",
