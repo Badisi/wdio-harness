@@ -38,7 +38,7 @@
         "webdriverio"
     ],
     "scripts": {
-        "build": "tsc && tsdown",
+        "build": "tsc --noEmit && tsdown",
         "release": "npm publish ../../dist --workspaces=false --access=public"
     },
     "publishConfig": {
