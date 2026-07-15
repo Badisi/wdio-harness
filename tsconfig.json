@@ -1,16 +1,15 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-    "compileOnSave": false,
     "files": [],
+    "include": [],
     "references": [
         {
-            "path": "./projects/library/tsconfig.json"
+            "path": "./projects/library"
         },
         {
-            "path": "./projects/tests-app/tsconfig.json"
+            "path": "./projects/tests-app"
         },
         {
-            "path": "./projects/tests-e2e/tsconfig.json"
+            "path": "./projects/tests-e2e"
         }
     ]
 }
