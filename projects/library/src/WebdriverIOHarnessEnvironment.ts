@@ -3,9 +3,6 @@ import logger from '@wdio/logger';
 import { WebdriverIOTestElement } from './WebdriverIOTestElement.js';
 import { green, magenta } from './utils';
 
-/** Registers the environment logger. */
-const log = logger('wdio-harness');
-
 /**
  * A `HarnessEnvironment` implementation for WebdriverIO.
  */
@@ -55,7 +52,7 @@ export class WebdriverIOHarnessEnvironment extends HarnessEnvironment<WebdriverI
 
     /** Gets a list of all elements matching the given selector under this environment's root element. */
     protected async getAllRawElements(selector: string): Promise<WebdriverIO.Element[]> {
-        log.info(`${magenta('GET_ALL_RAW_ELEMENTS')} ${green(selector.toString())}`);
+        logger('wdio-harness').info(`${magenta('GET_ALL_RAW_ELEMENTS')} ${green(selector.toString())}`);
         return [...(await this.rawRootElement.$$(selector).getElements())];
     }
 

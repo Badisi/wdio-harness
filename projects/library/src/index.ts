@@ -1,7 +1,28 @@
-import type { ComponentHarness, ComponentHarnessConstructor, HarnessQuery } from '@angular/cdk/testing';
+import { ComponentHarness, type ComponentHarnessConstructor, type HarnessQuery } from '@angular/cdk/testing';
 import { $, browser } from '@wdio/globals';
 
 import { WebdriverIOHarnessEnvironment } from './WebdriverIOHarnessEnvironment.js';
+
+/** Module augmentation to expose the host element as a public api */
+declare module '@angular/cdk/testing' {
+    interface ComponentHarness {
+        element(): WebdriverIO.Element;
+    }
+    interface TestElement {
+        element(): WebdriverIO.Element;
+    }
+}
+
+/** Patches `ComponentHarness.prototype` to expose the host element. */
+let _patched = false;
+export const patchComponentHarness = (): void => {
+    if (!_patched) {
+        _patched = true;
+        ComponentHarness.prototype.element = function (this: ComponentHarness): WebdriverIO.Element {
+            return this.locatorFactory.rootElement.element();
+        };
+    }
+};
 
 /**
  * Searches for all instances of the component corresponding to the given harness type under the
@@ -43,6 +64,7 @@ export const getHarness = async <T extends ComponentHarness>(
 export const createHarnessEnvironment = async (
     rootElement?: WebdriverIO.Element
 ): Promise<WebdriverIOHarnessEnvironment> => {
+    patchComponentHarness();
     return WebdriverIOHarnessEnvironment.loader(rootElement ?? await $('//body').getElement());
 };
 

@@ -1,5 +1,4 @@
 import {
-    ComponentHarness,
     type ElementDimensions,
     type EventData,
     type ModifierKeys,
@@ -17,11 +16,8 @@ enum Button {
     RIGHT = 'right'
 }
 
-/** Registers the element logger. */
-const log = logger('wdio-harness');
-
 /** Maps the `TestKey` constants to WebdriverIO's `Key` constants. */
-const keyMap: Record<number, string> = {
+const getKey = (key: TestKey): string => ({
     [TestKey.BACKSPACE]: 'Backspace',
     [TestKey.TAB]: 'Tab',
     [TestKey.ENTER]: 'Enter',
@@ -53,35 +49,22 @@ const keyMap: Record<number, string> = {
     [TestKey.F12]: 'F12',
     [TestKey.META]: 'Meta',
     [TestKey.COMMA]: ','
-};
-
-/** Module augmentation to expose the host element as a public api */
-declare module '@angular/cdk/testing' {
-    interface ComponentHarness {
-        element(): WebdriverIO.Element;
-    }
-    interface TestElement {
-        element(): WebdriverIO.Element;
-    }
-}
-ComponentHarness.prototype.element = function (this: ComponentHarness): WebdriverIO.Element {
-    return this.locatorFactory.rootElement.element();
-};
+}[key]);
 
 /** Converts a `ModifierKeys` object to a list of WebdriverIO `Key`s. */
 const toWebdriverIOModifierKeys = (modifiers: ModifierKeys): string[] => {
     const result: string[] = [];
     if (modifiers.control) {
-        result.push(keyMap[TestKey.CONTROL]);
+        result.push(getKey(TestKey.CONTROL));
     }
     if (modifiers.alt) {
-        result.push(keyMap[TestKey.ALT]);
+        result.push(getKey(TestKey.ALT));
     }
     if (modifiers.shift) {
-        result.push(keyMap[TestKey.SHIFT]);
+        result.push(getKey(TestKey.SHIFT));
     }
     if (modifiers.meta) {
-        result.push(keyMap[TestKey.META]);
+        result.push(getKey(TestKey.META));
     }
     return result;
 };
@@ -191,7 +174,7 @@ export class WebdriverIOTestElement implements TestElement {
         const KeyNULL = String.fromCharCode(57344);
         const modifierKeys = toWebdriverIOModifierKeys(modifiers);
         const keys = rest
-            .map(k => (typeof k === 'string' ? k.split('') : [keyMap[k]]))
+            .map(k => (typeof k === 'string' ? k.split('') : [getKey(k)]))
             .reduce((arr, k) => arr.concat(k), [])
             .reduce((arr, k) => {
                 if (modifierKeys.length > 0) {
@@ -305,9 +288,9 @@ export class WebdriverIOTestElement implements TestElement {
                 if (indexes.has(i)) {
                     // We have to hold the control key while clicking on options so that multiple can be
                     // selected in multi-selection mode. The key doesn't do anything for single selection.
-                    await this.keyDown(keyMap[TestKey.CONTROL]);
+                    await this.keyDown(getKey(TestKey.CONTROL));
                     await options[i].click();
-                    await this.keyUp(keyMap[TestKey.CONTROL]);
+                    await this.keyUp(getKey(TestKey.CONTROL));
                 }
             }
         }
@@ -375,6 +358,6 @@ export class WebdriverIOTestElement implements TestElement {
 
     /** Writes info to the console outputs. */
     private logAction(action: string, args?: string): void {
-        log.info(`${magenta(action)} ${green(this.hostElement.selector.toString())} ${args ? args : ''}`);
+        logger('wdio-harness').info(`${magenta(action)} ${green(this.hostElement.selector.toString())} ${args ? args : ''}`);
     }
 }
