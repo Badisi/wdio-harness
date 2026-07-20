@@ -28,7 +28,7 @@
 
 > A component harness is a class that lets a test interact with a component via a supported API. Each harness's API interacts with a component the same way a user would. By using the harness API, a test insulates itself against updates to the internals of a component, such as changing its DOM structure. The idea for component harnesses comes from the [PageObject](https://martinfowler.com/bliki/PageObject.html) pattern commonly used for integration testing.
 
-[More info](https://material.angular.io/cdk/test-harnesses/overview)
+[More info...](https://material.angular.io/cdk/test-harnesses/overview)
 
 <hr/>
 
