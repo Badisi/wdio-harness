@@ -1,7 +1,7 @@
 import { type ComponentHarness, type ComponentHarnessConstructor, HarnessEnvironment } from '@angular/cdk/testing';
 import logger from '@wdio/logger';
 import { WebdriverIOTestElement } from './WebdriverIOTestElement.js';
-import { green, magenta } from './utils';
+import { green, magenta } from './utils.js';
 
 /**
  * A `HarnessEnvironment` implementation for WebdriverIO.

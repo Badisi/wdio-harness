@@ -8,7 +8,7 @@ import {
 } from '@angular/cdk/testing';
 import { browser } from '@wdio/globals';
 import logger from '@wdio/logger';
-import { green, magenta } from './utils';
+import { green, magenta } from './utils.js';
 
 enum Button {
     LEFT = 'left',
