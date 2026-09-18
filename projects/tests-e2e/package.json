@@ -6,9 +6,9 @@
         "start": "wdio run wdio.config.ts --watch=false --debug=true --headless=false"
     },
     "devDependencies": {
-        "@wdio/cli": "9.29.1",
-        "@wdio/jasmine-framework": "9.29.1",
-        "@wdio/local-runner": "9.29.1",
-        "@wdio/spec-reporter": "9.29.1"
+        "@wdio/cli": "9.31.9",
+        "@wdio/jasmine-framework": "9.31.9",
+        "@wdio/local-runner": "9.31.9",
+        "@wdio/spec-reporter": "9.31.2"
     }
 }
