@@ -35,15 +35,21 @@ export const config: WebdriverIO.Config = {
     // ============
     // Capabilities
     // ============
-    maxInstances: debug ? 1 : 100,
+    maxInstances: debug ? 1 : 3,
     capabilities: [{
         'browserName': 'chrome',
         'browserVersion': 'stable',
         'acceptInsecureCerts': true,
         'goog:chromeOptions': {
-            args: headless ?
-                ['--headless', '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'] :
-                [debug ? '--auto-open-devtools-for-tabs' : '']
+            args: headless ? [
+                '--headless=new',
+                '--no-sandbox',
+                '--disable-gpu',
+                '--disable-dev-shm-usage',
+                '--window-size=1920,1086' // Sets a large virtual viewport area so all components fit in the viewport bounds
+            ] : [
+                debug ? '--auto-open-devtools-for-tabs' : ''
+            ]
         }
     }],
     // ===================

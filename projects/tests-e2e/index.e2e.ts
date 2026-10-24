@@ -57,6 +57,7 @@ describe('Angular Material Harness', () => {
          * Moreover this api is not efficient as it loops through all the cells no matter the filter.
          */
         const cellElement = await calendar.element().$('span.mat-calendar-body-cell-content=20').getElement();
+        await cellElement.waitForExist();
         const cell = await getHarness(MatCalendarCellHarness, cellElement);
         await cell.select();
         /** -- */
