@@ -48,14 +48,14 @@
     },
     "peerDependencies": {
         "@angular/cdk": ">= 13 < 22",
-        "@wdio/globals": ">= 9 < 10",
-        "@wdio/logger": ">= 9 < 10",
-        "webdriverio": ">= 9 < 10"
+        "@wdio/globals": ">= 10 < 11",
+        "@wdio/logger": ">= 10 < 11",
+        "webdriverio": ">= 10 < 11"
     },
     "devDependencies": {
         "@angular/cdk": "^22.2.4",
-        "@wdio/globals": "9.31.3",
-        "@wdio/logger": "9.29.1",
-        "webdriverio": "9.31.9"
+        "@wdio/globals": "10.1.0",
+        "@wdio/logger": "10.1.0",
+        "webdriverio": "10.1.0"
     }
 }
